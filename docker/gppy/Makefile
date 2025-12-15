@@ -1,5 +1,5 @@
 TARGET := gppy
-DOCKR := podman
+DOCKR := docker
 
 
 .PHONY: image
