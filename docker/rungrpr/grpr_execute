@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+echo "---- Executing grpr"
+. /usr/local/bin/grpr_env.sh
+python3 -m pip install -r requirements.txt --upgrade -q
+#grpr util config-local
+# Useful visual confirmations
+echo "   PATH = "$PATH
+echo "WORKDIR = "$(pwd)
+
+if [[ -v GRPR_PYTHON ]]; then
+    grpr_python
+fi
+
+echo "---- Exiting grpr"
