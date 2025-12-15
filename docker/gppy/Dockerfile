@@ -2,9 +2,9 @@
 # Copyright TLM Partners, Inc. All Rights Reserved
 #
 # Use an LTS image for the base
-FROM python:3.13-alpine as base
+FROM python:3.13-alpine AS base
 
-FROM base as builder
+FROM base AS builder
 ENV SERVICE_NAME="gppy"
 ENV PIP_ROOT_USER_ACTION=ignore
 
@@ -14,7 +14,7 @@ RUN apk add busybox \
     curl \
     wget
 # pyo dependencies
-RUN apk add gcc libc-dev
+# RUN apk add gcc libc-dev
     # portaudio portaudio-dev \
     # libsndfile libsndfile-dev \
     # portmidi portmidi-dev \
