@@ -6,8 +6,6 @@ python3 -m pip install -r /tmp/requirements.txt --upgrade -q
 echo "   PATH = "$PATH
 echo "WORKDIR = "$(pwd)
 
-if [[ -v GPPY_PY ]]; then
-    gppy_py
-fi
+gppy_py
 
 echo "---- Exiting gppy_execute"
