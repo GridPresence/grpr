@@ -5,5 +5,6 @@ git fetch
 git pull
 pushd docker/gppy
 make
+make exec
 popd
 popd

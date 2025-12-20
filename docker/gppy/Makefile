@@ -10,6 +10,6 @@ image:
 clean-image:
 		DOCKER_BUILDKIT=1 ${DOCKR} build --no-cache -t ${TARGET} -f Dockerfile .
 
-.PHONT: exec
+.PHONY: exec
 exec:
 		${DOCKR} run -e GPPY_PY=1 ${TARGET} 
