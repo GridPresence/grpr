@@ -3,7 +3,7 @@
 pushd $HOME/Code/grpr
 git fetch
 git pull
-pushd grpr/docker/gppy
+pushd docker/gppy
 make
 popd
 popd
