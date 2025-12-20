@@ -1,19 +1,7 @@
 pip
 python-dateutil
 types-python-dateutil
-typer[all]
 packaging
-build 
-twine 
-tbump 
 truststore 
-sphinx 
-sphinx-autodoc-typehints 
-sphinxcontrib-napoleon 
-sphinx_rtd_theme 
-pytest 
-black 
-mypy 
-pylint
 sqlalchemy
 
