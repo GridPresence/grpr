@@ -1,38 +1,7 @@
 #!/usr/bin/env bash
-echo "-------- Executing igor_python"
-echo " Target = "$TARGET_PACKAGE
-echo " Deploy = "$DEPLOY_CHANGES
+echo "-------- Executing grpr_python"
 
-# If we want to deploy to the techopsdocs static website bucket,
-# these non-default credentials should be present and configured into a 
-# techopsdocs profile in the container.
-if [[ -v TOPSDOX_AWS_ACCESS_KEY_ID ]]; then
-    aws configure set aws_access_key_id $TOPSDOX_AWS_ACCESS_KEY_ID --profile techopsdocs
-fi
-if [[ -v TOPSDOX_AWS_SECRET_ACCESS_KEY ]]; then
-    aws configure set aws_secret_access_key $TOPSDOX_AWS_SECRET_ACCESS_KEY --profile techopsdocs
-fi
-
-# Drop down into the target package's subdirectory
-pushd py/$TARGET_PACKAGE
-if [ $TARGET_PACKAGE == "docs" ]; then
-    make clean
-    make html
-    if [[ -v DEPLOY_CHANGES ]]; then
-        # This where we use the non-default techopsdocs profile to upload
-        aws s3 sync --delete build/html/ s3://techopsdocs.tlmpartners-internal.com/python --profile techopsdocs
-    fi
-else
-    if [[ -v DEPLOY_CHANGES ]]; then
-        make deploy
-    else
-        make check
-    fi
-    retVal=$?
-    if [ $retVal -ne 0 ]; then
-        echo "Make failures"
-        exit $retVal
-    fi
-fi
+pushd python/grpr
+pwd
 popd
 echo "-------- Exiting igor_python"
