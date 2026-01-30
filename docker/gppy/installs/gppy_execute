@@ -5,8 +5,7 @@ python3 -m pip install -r /tmp/requirements.txt --upgrade -q
 # Useful visual confirmations
 echo "   PATH = "$PATH
 echo "WORKDIR = "$(pwd)
-ls -lR
-
+echo "Mount some workspace volumes hereabouts"
 gppy_py
 
 echo "--------  Exiting gppy_execute"
