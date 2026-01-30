@@ -3,6 +3,7 @@
 # pushd $HOME/Code/grpr
 git fetch
 git pull
+echo "kurgan_exec : "$(pwd)
 pushd docker/gppy
 make
 make exec
