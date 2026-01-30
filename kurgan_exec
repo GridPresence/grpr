@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+echo "---- Executing kurgan_exec"
 # pushd $HOME/Code/grpr
 git fetch
 git pull
@@ -8,3 +8,4 @@ pushd docker/gppy
 make clean-image
 make exec
 popd
+echo "---- Exiting kurgan_exec"
