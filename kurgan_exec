@@ -6,6 +6,6 @@ git pull
 echo "kurgan_exec : "$(pwd)
 pushd docker/gppy
 make clean-image
-# make exec
+make exec
 popd
 echo "---- Exiting kurgan_exec"
