@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 echo "-------- Executing grpr_python"
 
-pushd python/grpr
 pwd
+echo "Push"
+pushd python/grpr
+
+pwd
+
+echo "Pop"
 popd
-echo "-------- Exiting igor_python"
+pwd
+
+echo "-------- Exiting grpr_python"
