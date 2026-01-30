@@ -1,5 +1,5 @@
 TARGET := rungrpr
-DOCKR := podman
+# DOCKR := podman
 
 .PHONY: image
 image:

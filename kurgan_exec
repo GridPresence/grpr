@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-pushd $HOME/Code/grpr
+# pushd $HOME/Code/grpr
 git fetch
 git pull
 pushd docker/gppy
 make
 make exec
-popd
 popd
