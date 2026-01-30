@@ -5,6 +5,6 @@ git fetch
 git pull
 echo "kurgan_exec : "$(pwd)
 pushd docker/gppy
-make
+make clean-image
 make exec
 popd
