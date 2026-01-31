@@ -7,7 +7,7 @@ echo "     PATH = "$PATH
 echo "   WORKDIR = "$(pwd)
 echo "  MyServer = "$MyServer
 echo "    MyUser = "$MyUser
-echo "MyPassword = "$MyPassword
+#echo "MyPassword = "$MyPassword
 echo "Mount some workspace volumes hereabouts"
 gppy_py
 
