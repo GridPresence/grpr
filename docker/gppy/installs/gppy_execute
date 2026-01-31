@@ -5,6 +5,9 @@ python3 -m pip install -r /tmp/requirements.txt --upgrade -q
 # Useful visual confirmations
 echo "   PATH = "$PATH
 echo "WORKDIR = "$(pwd)
+echo "   SRVR = "$SRVR
+echo "    USR = "$USR
+echo "  PSSWD = "$PSSWD
 echo "Mount some workspace volumes hereabouts"
 gppy_py
 

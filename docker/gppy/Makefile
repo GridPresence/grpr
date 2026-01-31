@@ -12,4 +12,4 @@ clean-image:
 
 .PHONY: exec
 exec:
-		${DOCKR} run -e GPPY_PY=1 ${TARGET} 
+		${DOCKR} run -e GPPY_PY=1 SRVR=${DBSRVR} USR=${DBUSR} PSSWD=${DBPSSWD} ${TARGET}
