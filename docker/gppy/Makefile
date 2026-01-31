@@ -12,4 +12,4 @@ clean-image:
 
 .PHONY: exec
 exec:
-		${DOCKR} run -e GPPY_PY=1 MYSQLSRVR="${DBSRVR}" MYSQLUSR="${DBUSR}" MYSQLPSSWD="${DBPSSWD}" ${TARGET}
+		${DOCKR} run -e GPPY_PY=1 -e MyServer=${DBSRVR} -e MyUser="${DBUSR}" -e MyPassword="${DBPSSWD}" ${TARGET}

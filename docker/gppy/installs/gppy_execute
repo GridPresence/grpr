@@ -3,11 +3,11 @@ echo "-------- Entering gppy_execute"
 python3 -m pip install -r /tmp/requirements.txt --upgrade -q
 #grpr util config-local
 # Useful visual confirmations
-echo "   PATH = "$PATH
-echo "WORKDIR = "$(pwd)
-echo "   SRVR = "$SRVR
-echo "    USR = "$USR
-echo "  PSSWD = "$PSSWD
+echo "     PATH = "$PATH
+echo "   WORKDIR = "$(pwd)
+echo "  MyServer = "$MyServer
+echo "    MyUser = "$MyUser
+echo "MyPassword = "$MyPassword
 echo "Mount some workspace volumes hereabouts"
 gppy_py
 
