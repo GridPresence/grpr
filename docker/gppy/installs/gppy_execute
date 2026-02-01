@@ -9,6 +9,7 @@ echo "  MyServer = "$MyServer
 echo "    MyUser = "$MyUser
 #echo "MyPassword = "$MyPassword
 echo "Mount some workspace volumes hereabouts"
+df -BG
 gppy_py
 
 echo "--------  Exiting gppy_execute"
