@@ -1,4 +1,4 @@
 #!/usr/bin/env python3
 print("-------- Entering gppy_py")
-print("...... This is the new place")
+print("...... This is the newer place")
 print("--------  Exiting gppy_py")
