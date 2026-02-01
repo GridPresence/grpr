@@ -3,7 +3,7 @@ DOCKR := docker
 
 
 .PHONY: image
-image:
+image: installs/gppy_py
 		DOCKER_BUILDKIT=1 ${DOCKR} build -t ${TARGET} -f Dockerfile .
 
 .PHONY: clean-image
