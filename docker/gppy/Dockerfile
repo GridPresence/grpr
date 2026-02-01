@@ -15,10 +15,10 @@ RUN apk add busybox \
     wget
 # pyo dependencies
 # RUN apk add gcc libc-dev
-    # portaudio portaudio-dev \
-    # libsndfile libsndfile-dev \
-    # portmidi portmidi-dev \
-    # liblo liblo-dev
+# portaudio portaudio-dev \
+# libsndfile libsndfile-dev \
+# portmidi portmidi-dev \
+# liblo liblo-dev
 
 
 COPY installs/* /tmp
@@ -37,6 +37,8 @@ RUN install /tmp/gppy_py /usr/local/bin/gppy_py
 RUN adduser -D $SERVICE_NAME
 # Execute in the host tree
 WORKDIR /home/$SERVICE_NAME
+RUN mkdir -p Sources
+RUN mkdir -p Playlists
 RUN chown -R $SERVICE_NAME:$SERVICE_NAME /home/$SERVICE_NAME
 USER $SERVICE_NAME
 # RUN ls -l /tmp

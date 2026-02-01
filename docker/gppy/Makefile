@@ -1,6 +1,8 @@
 TARGET := gppy
 DOCKR := docker
-
+DKRENVS := "-e MyServer=${DBSRVR} -e MyUser=${DBUSR} -e MyPassword=${DBPSSWD}"
+DKRSRCS := "--mount type=bind,src=${MNTSRCS},dest=/home/gppy/Sources,ro"
+DKRDEST := "--mount type=bind,src=${MNTDEST},dest=/home/gppy/Playlists"
 
 .PHONY: image
 image: installs/gppy_py
@@ -12,4 +14,4 @@ clean-image:
 
 .PHONY: exec
 exec:
-		@${DOCKR} run -e GPPY_PY=1 -e MyServer=${DBSRVR} -e MyUser="${DBUSR}" -e MyPassword="${DBPSSWD}" ${TARGET}
+		${DOCKR} run ${DKRENVS} ${DKRSRCS} ${DKRDEST} ${TARGET}
