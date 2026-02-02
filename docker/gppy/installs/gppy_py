@@ -27,5 +27,5 @@ if __name__ == "__main__":
     print(sources)
     playlists = Path(os.getenv("PLAYLISTS"))
     print(playlists)
-    scan(sources)
+    scan(source=sources)
     print("--------  Exiting gppy_py")
