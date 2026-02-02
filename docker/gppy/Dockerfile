@@ -38,7 +38,9 @@ RUN adduser -D $SERVICE_NAME
 # Execute in the host tree
 WORKDIR /home/$SERVICE_NAME
 RUN mkdir -p Sources
+ENV FLACSRCS=/home/$SERVICE_NAME/Sources
 RUN mkdir -p Playlists
+ENV PLAYLISTS=/home/$SERVICE_NAME/Playlists
 RUN chown -R $SERVICE_NAME:$SERVICE_NAME /home/$SERVICE_NAME
 USER $SERVICE_NAME
 # RUN ls -l /tmp
