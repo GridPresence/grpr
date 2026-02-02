@@ -23,8 +23,9 @@ def scan(source: Path):
 
 if __name__ == "__main__":
     print("-------- Entering gppy_py")
-    sources = os.getenv("FLACSRCS")
+    sources = Path(os.getenv("FLACSRCS"))
     print(sources)
-    playlists = os.getenv("PLAYLISTS")
+    playlists = Path(os.getenv("PLAYLISTS"))
     print(playlists)
+    scan(sources)
     print("--------  Exiting gppy_py")
