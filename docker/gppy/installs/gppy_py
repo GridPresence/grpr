@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import json
 from typing import Dict
 from pathlib import Path
 
@@ -10,6 +11,146 @@ from mutagen.flac import FLAC, StreamInfo
 
 AUDIO_FORMATS = [".mp3", ".flac"]
 PLAYLIST_FORMATS = [".m3u"]
+
+
+class LibFile:
+    """
+    A description of a library file
+    """
+
+    def __init__(self, src: Path):
+        self._path: Path = src.resolve()
+        self._modified: int = 0
+        self._exists: bool = False
+        self._size: int = 0
+        self.refresh_state()
+
+    def __str__(self) -> str:
+        return f"{self._path}: ({self._modified} ... {self._size})"
+
+    @property
+    def name(self) -> str:
+        """Accessor"""
+        return self._path.name
+
+    @property
+    def parent(self) -> Path:
+        """Accessor"""
+        return self._path.parent
+
+    @property
+    def path(self) -> Path:
+        """Accessor"""
+        return self._path
+
+    @property
+    def suffix(self) -> str:
+        """Accessor"""
+        return self._path.suffix
+
+    @property
+    def exists(self) -> bool:
+        """Accessor"""
+        return self._exists
+
+    @property
+    def modified(self) -> int:
+        """Accessor"""
+        return self._modified
+
+    @property
+    def size(self) -> int:
+        """Accessor"""
+        return self._size
+
+    def refresh_state(self):
+        """
+        Update knowledge about the file state
+        """
+        self._exists = self._path.exists()
+        if self._exists:
+            self._modified = int(self._path.stat().st_mtime)
+            self._size = self._path.stat().st_size
+
+
+class FlacFile:
+    """Wrapper class"""
+
+    def __init__(self, sbj: LibFile):
+        self._sbj: LibFile = sbj
+        self._mdata: Dict[str, Any] = {}
+        self._mdata["valid"] = False
+        self._mdata["hires"] = False
+        if (self._sbj.exists) and (self._sbj.suffix == ".flac"):
+            self._mdata["valid"] = True
+        if self._mdata["valid"]:
+            self._flac: FLAC = FLAC(self._sbj.path)
+            _info: StreamInfo = self._flac.info
+            self._mdata["sample_rate"] = _info.sample_rate
+            self._mdata["bits_per_sample"] = _info.bits_per_sample
+            self._mdata["channels"] = _info.channels
+            self._mdata["bitrate"] = _info.bitrate
+            if (self._mdata["bits_per_sample"] > 16) or (
+                self._mdata["sample_rate"] > 44100
+            ):
+                self._mdata["hires"] = True
+            self._mdata["genre"] = str(self._flac["GENRE"][0])
+
+    @property
+    def valid(self):
+        """Accessor"""
+        return self._mdata["valid"]
+
+    @property
+    def sample_rate(self) -> int:
+        """Accessor"""
+        if self.valid:
+            return self._mdata["sample_rate"]
+        return -1
+
+    @property
+    def bits_per_sample(self) -> int:
+        """Accessor"""
+        if self.valid:
+            return self._mdata["bits_per_sample"]
+        return -1
+
+    @property
+    def channels(self) -> int:
+        """Accessor"""
+        if self.valid:
+            return self._mdata["channels"]
+        return -1
+
+    @property
+    def bitrate(self) -> int:
+        """Accessor"""
+        if self.valid:
+            return self._mdata["bitrate"]
+        return -1
+
+    @property
+    def hires(self) -> bool:
+        """Accessor"""
+        if self.valid:
+            return self._mdata["hires"]
+        return False
+
+    @property
+    def genre(self) -> str:
+        """Accessor"""
+        if self.valid:
+            return self._mdata["genre"]
+        return "NULL"
+
+    def debug(self):
+        """
+        Debugger
+        """
+        print(self._flac.pprint())
+
+    def __str__(self) -> str:
+        return json.dumps(self._mdata)
 
 
 def flac_tags(spath: Path) -> Dict[str, str]:
@@ -83,10 +224,13 @@ def walk(spath: Path):
 
 def scan(source: Path):
     """Run here"""
+    fast_run_ctr = 0
     for fyle in walk(spath=source):
         if fyle.suffix in AUDIO_FORMATS:
-            # print(fyle)
-            pass
+            print(tags(fyle))
+        fast_run_ctr += 1
+        if fast_run_ctr > 250:
+            return
 
 
 if __name__ == "__main__":
