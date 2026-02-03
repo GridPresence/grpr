@@ -8,7 +8,7 @@ def walk(spath: Path):
     """Some stuff"""
     for path in sorted(spath.iterdir(), reverse=False):
         if path.is_dir():
-            # print(path)
+            print(path)
             yield from walk(path)
             continue
         yield path.resolve()
@@ -18,7 +18,8 @@ def scan(source: Path):
     """Run here"""
     for fyle in walk(spath=source):
         if fyle.suffix in [".mp3", ".flac", ".m3u"]:
-            print(fyle)
+            # print(fyle)
+            pass
 
 
 if __name__ == "__main__":
