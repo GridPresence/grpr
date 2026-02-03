@@ -84,6 +84,7 @@ class FlacFile:
         if (self._sbj.exists) and (self._sbj.suffix == ".flac"):
             self._mdata["valid"] = True
         if self._mdata["valid"]:
+            self._mdata["size"] = self._sbj.size
             self._flac: FLAC = FLAC(self._sbj.path)
             _info: StreamInfo = self._flac.info
             self._mdata["sample_rate"] = _info.sample_rate
@@ -158,7 +159,7 @@ def flac_tags(spath: Path) -> Dict[str, str]:
     retval: Dict[str, str] = {}
     libf = LibFile(spath)
     flak = FlacFile(libf)
-    flak.debug()
+    print(flak)
     # genre = flak["genre"]
     # idthree = ID3(spath)
     # print(idthree.pprint())
