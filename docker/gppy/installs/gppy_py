@@ -103,6 +103,11 @@ class FlacFile:
         return self._mdata["valid"]
 
     @property
+    def tags(self):
+        """Accessor"""
+        return self._flac.tags
+
+    @property
     def sample_rate(self) -> int:
         """Accessor"""
         if self.valid:
