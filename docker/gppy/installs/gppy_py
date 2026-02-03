@@ -160,6 +160,7 @@ def flac_tags(spath: Path) -> Dict[str, str]:
     libf = LibFile(spath)
     flak = FlacFile(libf)
     print(flak)
+    print(flak.tags)
     # genre = flak["genre"]
     # idthree = ID3(spath)
     # print(idthree.pprint())
