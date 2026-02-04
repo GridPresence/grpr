@@ -80,7 +80,7 @@ class FlacFile:
     def __init__(self, sbj: LibFile):
         self._sbj: LibFile = sbj
         self._mdata: Dict[str, Any] = {}
-        self._mdata["path"] = self._sbj.path
+        self._mdata["path"] = str(self._sbj.path)
         self._mdata["valid"] = False
         self._mdata["hires"] = False
         if (self._sbj.exists) and (self._sbj.suffix == ".flac"):
