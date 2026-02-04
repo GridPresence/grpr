@@ -109,7 +109,7 @@ class FlacFile:
     @property
     def tags(self):
         """Accessor"""
-        return self._flac.tags
+        return self._mdata
 
     @property
     def sample_rate(self) -> int:
@@ -165,11 +165,11 @@ class FlacFile:
 
 def flac_tags(spath: Path) -> Dict[str, str]:
     """Return the tags from a FLAC file"""
-    retval: Dict[str, str] = {}
+    # retval: Dict[str, str] = {}
     libf = LibFile(spath)
     flak = FlacFile(libf)
-    print(flak)
-    print(flak.tags)
+    # print(flak)
+    # print(flak.tags)
     # genre = flak["genre"]
     # idthree = ID3(spath)
     # print(idthree.pprint())
@@ -189,7 +189,7 @@ def flac_tags(spath: Path) -> Dict[str, str]:
     #     retval["composer"] = idthree["TCOM"].text[0]
     # except KeyError:
     #     retval["composer"] = "Unknown"
-    return retval
+    return flak.tags
 
 
 def mp3_tags(spath: Path) -> Dict[str, str]:
