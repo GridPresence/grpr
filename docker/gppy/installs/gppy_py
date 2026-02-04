@@ -3,10 +3,14 @@
 import os
 import json
 import time
+import uuid
 
 from typing import Dict, Any
 from pathlib import Path
-from sqlalchemy import create_engine, URL
+from sqlalchemy import create_engine, URL, MetaData
+from sqlalchemy import Table, Column, Integer, String
+from sqlalchemy.orm import DeclarativeBase
+
 
 from mutagen.mp3 import MP3
 from mutagen.id3 import ID3
@@ -16,17 +20,23 @@ AUDIO_FORMATS = [".mp3", ".flac"]
 PLAYLIST_FORMATS = [".m3u"]
 
 
-class Artist:
+class Artist(DeclarativeBase):
+    __tablename__ = "artists"
+
     def __init__(self):
         pass
 
 
-class Album:
+class Album(DeclarativeBase):
+    __tablename__ = "albums"
+
     def __init__(self):
         pass
 
 
-class Song:
+class Track(DeclarativeBase):
+    __tablename__ = "tracks"
+
     def __init__(self):
         pass
 
@@ -41,7 +51,7 @@ class Database:
             database=os.getenv("MyDb"),
         )
         self._engine = create_engine(self._url, echo=True)
-        print("Database connected!")
+        self._metadata_obj = MetaData()
 
 
 class LibFile:
@@ -262,4 +272,9 @@ if __name__ == "__main__":
     playlists = Path(os.getenv("PLAYLISTS"))
     print(playlists)
     scan(source=sources)
+    print(uuid.uuid4().hex)
+    print(uuid.uuid4().hex)
+    print(uuid.uuid4().hex)
+    print(uuid.uuid4().hex)
+    print(uuid.uuid4().hex)
     print("--------  Exiting gppy_py")
