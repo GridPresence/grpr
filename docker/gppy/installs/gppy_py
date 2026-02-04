@@ -16,6 +16,34 @@ AUDIO_FORMATS = [".mp3", ".flac"]
 PLAYLIST_FORMATS = [".m3u"]
 
 
+class Artist:
+    def __init__(self):
+        pass
+
+
+class Album:
+    def __init__(self):
+        pass
+
+
+class Song:
+    def __init__(self):
+        pass
+
+
+class Database:
+    def __init__(self):
+        self._url = URL.create(
+            "mysql+mysqlconnector",
+            username=os.getenv("MyUser"),
+            password=os.getenv("MyPassword"),
+            host=os.getenv("MyServer"),
+            database=os.getenv("MyDb"),
+        )
+        self._engine = create_engine(self._url, echo=True)
+        print("Database connected!")
+
+
 class LibFile:
     """
     A description of a library file
@@ -222,21 +250,8 @@ def scan(source: Path):
         if fyle.suffix in AUDIO_FORMATS:
             print(json.dumps(tags(fyle, source), indent=4, sort_keys=True))
         fast_run_ctr += 1
-        if fast_run_ctr > 250:
+        if fast_run_ctr > 50:
             return
-
-
-class Database:
-    def __init__(self):
-        self._url = URL.create(
-            "mysql+mysqlconnector",
-            username=os.getenv("MyUser"),
-            password=os.getenv("MyPassword"),
-            host=os.getenv("MyServer"),
-            database=os.getenv("MyDb"),
-        )
-        self._engine = create_engine(self._url)
-        print("Database connected!")
 
 
 if __name__ == "__main__":
