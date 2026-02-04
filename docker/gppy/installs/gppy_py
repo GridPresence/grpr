@@ -19,8 +19,9 @@ class LibFile:
     A description of a library file
     """
 
-    def __init__(self, src: Path):
-        self._path: Path = src.resolve()
+    def __init__(self, src: Path, root: Path):
+        self._fullpath: Path = src.resolve()
+        self._path: Path = self._fullpath.relative_to(root)
         self._modified: int = 0
         self._exists: bool = False
         self._size: int = 0
@@ -45,9 +46,14 @@ class LibFile:
         return self._path
 
     @property
+    def fullpath(self) -> Path:
+        """Accessor"""
+        return self._fullpath
+
+    @property
     def suffix(self) -> str:
         """Accessor"""
-        return self._path.suffix
+        return self._fullpath.suffix
 
     @property
     def exists(self) -> bool:
@@ -68,10 +74,10 @@ class LibFile:
         """
         Update knowledge about the file state
         """
-        self._exists = self._path.exists()
+        self._exists = self._fullpath.exists()
         if self._exists:
-            self._modified = int(self._path.stat().st_mtime)
-            self._size = self._path.stat().st_size
+            self._modified = int(self._fullpath.stat().st_mtime)
+            self._size = self._fullpath.stat().st_size
 
 
 class FlacFile:
@@ -158,14 +164,14 @@ class FlacFile:
         return tstr
 
 
-def flac_tags(spath: Path) -> Dict[str, str]:
+def flac_tags(spath: Path, root: Path) -> Dict[str, str]:
     """Return the tags from a FLAC file"""
-    libf = LibFile(spath)
+    libf = LibFile(spath, root)
     flak = FlacFile(libf)
     return flak.tags
 
 
-def mp3_tags(spath: Path) -> Dict[str, str]:
+def mp3_tags(spath: Path, root: Path) -> Dict[str, str]:
     """Return the ID3 tags from an MP3 file"""
     retval: Dict[str, str] = {}
     mpthree = MP3(spath)
@@ -190,11 +196,11 @@ def mp3_tags(spath: Path) -> Dict[str, str]:
     return retval
 
 
-def tags(spath: Path) -> Dict[str, str]:
+def tags(spath: Path, root: Path) -> Dict[str, str]:
     """Extract relevant tags according to format"""
     if spath.suffix == ".flac":
-        return flac_tags(spath)
-    return mp3_tags(spath)
+        return flac_tags(spath, root)
+    return mp3_tags(spath, root)
 
 
 def walk(spath: Path):
@@ -212,7 +218,7 @@ def scan(source: Path):
     fast_run_ctr = 0
     for fyle in walk(spath=source):
         if fyle.suffix in AUDIO_FORMATS:
-            print(json.dumps(tags(fyle), indent=4, sort_keys=True))
+            print(json.dumps(tags(fyle, source), indent=4, sort_keys=True))
         fast_run_ctr += 1
         if fast_run_ctr > 250:
             return
