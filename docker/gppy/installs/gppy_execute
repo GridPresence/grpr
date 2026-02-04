@@ -9,10 +9,10 @@ echo "  MyServer = "$MyServer
 echo "    MyUser = "$MyUser
 #echo "MyPassword = "$MyPassword
 echo "Mount some workspace volumes hereabouts"
-df -BG
-ls -l 
-ls -l Sources
-ls -l Playlists
+#df -BG
+#ls -l 
+#ls -l Sources
+#ls -l Playlists
 
 gppy_py
 
