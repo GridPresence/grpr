@@ -226,25 +226,25 @@ def scan(source: Path):
             return
 
 
-def dbconnect():
-    url = URL.create(
-        "mysql+mysqlconnector",
-        username=os.getenv("MyUser"),
-        password=os.getenv("MyPassword"),
-        host=os.getenv("MyServer"),
-        database=os.getenv("MyDb"),
-    )
-    print(url)
-    time.sleep(5)
+class Database:
+    def __init__(self):
+        self._url = URL.create(
+            "mysql+mysqlconnector",
+            username=os.getenv("MyUser"),
+            password=os.getenv("MyPassword"),
+            host=os.getenv("MyServer"),
+            database=os.getenv("MyDb"),
+        )
+        self._engine = create_engine(self._url)
+        print("Database connected!")
 
 
 if __name__ == "__main__":
     print("-------- Entering gppy_py")
-    dbconnect()
+    db = Database()
     sources = Path(os.getenv("FLACSRCS"))
     print(sources)
     playlists = Path(os.getenv("PLAYLISTS"))
     print(playlists)
     scan(source=sources)
-    print(f"SQLAlchemy version: {sqlalchemy.__version__}")
     print("--------  Exiting gppy_py")
