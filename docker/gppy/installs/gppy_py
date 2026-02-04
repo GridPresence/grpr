@@ -94,7 +94,7 @@ class FlacFile:
             self._mdata["valid"] = True
         if self._mdata["valid"]:
             self._mdata["size"] = self._sbj.size
-            self._flac: FLAC = FLAC(self._sbj.path)
+            self._flac: FLAC = FLAC(self._sbj.fullpath)
             _info: StreamInfo = self._flac.info
             self._mdata["sample_rate"] = _info.sample_rate
             self._mdata["bits_per_sample"] = _info.bits_per_sample
