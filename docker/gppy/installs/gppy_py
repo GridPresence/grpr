@@ -96,9 +96,10 @@ class FlacFile:
                 self._mdata["sample_rate"] > 44100
             ):
                 self._mdata["hires"] = True
-            self._mdata["genre"] = str(self._flac["GENRE"][0])
+            # self._mdata["genre"] = str(self._flac["GENRE"][0])
             for k, v in self._flac.tags:
                 print(f"{k} ... {v}")
+                self._mdata[k] = v
 
     @property
     def valid(self):
