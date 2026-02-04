@@ -70,9 +70,9 @@ class Database:
             test_track = Track()
             # test_artist = Artist()
             test_album = Album()
-            session.add(Track)
-            # session.add(Artist)
-            session.add(Album)
+            session.add(test_track)
+            # session.add(test_artist)
+            session.add(test_album)
             session.commit()
 
 
@@ -294,9 +294,4 @@ if __name__ == "__main__":
     playlists = Path(os.getenv("PLAYLISTS"))
     print(playlists)
     scan(source=sources)
-    print(uuid.uuid4().hex)
-    print(uuid.uuid4().hex)
-    print(uuid.uuid4().hex)
-    print(uuid.uuid4().hex)
-    print(uuid.uuid4().hex)
     print("--------  Exiting gppy_py")
