@@ -2,6 +2,7 @@
 
 import os
 import json
+import time
 
 from typing import Dict, Any
 from pathlib import Path
@@ -234,7 +235,7 @@ def dbconnect():
         database=os.getenv("MyDb"),
     )
     print(url)
-    sleep(5)
+    time.sleep(5)
 
 
 if __name__ == "__main__":
