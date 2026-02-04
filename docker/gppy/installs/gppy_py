@@ -2,8 +2,8 @@
 
 import os
 import json
-import copy
-from typing import Dict
+
+from typing import Dict, Any
 from pathlib import Path
 
 from mutagen.mp3 import MP3
@@ -153,42 +153,14 @@ class FlacFile:
             return self._mdata["genre"]
         return "NULL"
 
-    def debug(self):
-        """
-        Debugger
-        """
-        print(self._flac.pprint())
-
     def __str__(self) -> str:
         return json.dumps(self._mdata)
 
 
 def flac_tags(spath: Path) -> Dict[str, str]:
     """Return the tags from a FLAC file"""
-    # retval: Dict[str, str] = {}
     libf = LibFile(spath)
     flak = FlacFile(libf)
-    # print(flak)
-    # print(flak.tags)
-    # genre = flak["genre"]
-    # idthree = ID3(spath)
-    # print(idthree.pprint())
-    # retval["length"] = int(mpthree.info.length)
-    # retval["artist"] = idthree["TPE1"].text[0]
-    # retval["disc"] = idthree["TPOS"].text[0]
-    # retval["track"] = idthree["TRCK"].text[0]
-    # try:
-    #     retval["date"] = idthree["TDRC"].text[0]
-    # except KeyError:
-    #     print(idthree.pprint())
-    #     retval["date"] = "1962-12-22"
-    # retval["album"] = idthree["TALB"].text[0]
-    # retval["title"] = idthree["TIT2"].text[0]
-    # retval["genre"] = idthree["TCON"].text[0]
-    # try:
-    #     retval["composer"] = idthree["TCOM"].text[0]
-    # except KeyError:
-    #     retval["composer"] = "Unknown"
     return flak.tags
 
 
@@ -218,6 +190,7 @@ def mp3_tags(spath: Path) -> Dict[str, str]:
 
 
 def tags(spath: Path) -> Dict[str, str]:
+    """Extract relevant tags according to format"""
     if spath.suffix == ".flac":
         return flac_tags(spath)
     return mp3_tags(spath)
