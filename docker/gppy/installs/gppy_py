@@ -81,6 +81,7 @@ class FlacFile:
         self._sbj: LibFile = sbj
         self._mdata: Dict[str, Any] = {}
         self._mdata["path"] = str(self._sbj.path)
+        self._mdata["file"] = self._sbj.path.name
         self._mdata["valid"] = False
         self._mdata["hires"] = False
         if (self._sbj.exists) and (self._sbj.suffix == ".flac"):
@@ -153,7 +154,7 @@ class FlacFile:
         return "NULL"
 
     def __str__(self) -> str:
-        return json.dumps(self._mdata)
+        return json.dumps(self._mdata, indent=4, sort_keys=True)
 
 
 def flac_tags(spath: Path) -> Dict[str, str]:
