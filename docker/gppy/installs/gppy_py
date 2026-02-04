@@ -154,7 +154,8 @@ class FlacFile:
         return "NULL"
 
     def __str__(self) -> str:
-        return json.dumps(self._mdata, indent=4, sort_keys=True)
+        tstr = json.dumps(self._mdata, indent=4, sort_keys=True)
+        return tstr
 
 
 def flac_tags(spath: Path) -> Dict[str, str]:
@@ -211,7 +212,7 @@ def scan(source: Path):
     fast_run_ctr = 0
     for fyle in walk(spath=source):
         if fyle.suffix in AUDIO_FORMATS:
-            print(tags(fyle))
+            print(json.dumps(tags(fyle), indent=4, sort_tags=True))
         fast_run_ctr += 1
         if fast_run_ctr > 250:
             return
