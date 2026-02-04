@@ -212,7 +212,7 @@ def scan(source: Path):
     fast_run_ctr = 0
     for fyle in walk(spath=source):
         if fyle.suffix in AUDIO_FORMATS:
-            print(json.dumps(tags(fyle), indent=4, sort_tags=True))
+            print(json.dumps(tags(fyle), indent=4, sort_keys=True))
         fast_run_ctr += 1
         if fast_run_ctr > 250:
             return
