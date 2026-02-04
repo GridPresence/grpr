@@ -20,21 +20,25 @@ AUDIO_FORMATS = [".mp3", ".flac"]
 PLAYLIST_FORMATS = [".m3u"]
 
 
-class Artist(DeclarativeBase):
+class Base(DeclarativeBase):
+    pass
+
+
+class Artist(Base):
     __tablename__ = "artists"
 
     def __init__(self):
         pass
 
 
-class Album(DeclarativeBase):
+class Album(Base):
     __tablename__ = "albums"
 
     def __init__(self):
         pass
 
 
-class Track(DeclarativeBase):
+class Track(Base):
     __tablename__ = "tracks"
 
     def __init__(self):
