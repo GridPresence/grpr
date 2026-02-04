@@ -27,19 +27,28 @@ class Base(DeclarativeBase):
 # class Artist(Base):
 #     __tablename__ = "artists"
 
+#     id: Mapped[str] = mapped_column(primary_key=True)
+
+
 #     def __init__(self):
 #         pass
 
 
-# class Album(Base):
-#     __tablename__ = "albums"
+class Album(Base):
+    __tablename__ = "albums"
+
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+
 
 #     def __init__(self):
 #         pass
 
 
-# class Track(Base):
-#     __tablename__ = "tracks"
+class Track(Base):
+    __tablename__ = "tracks"
+
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+
 
 #     def __init__(self):
 #         pass
@@ -55,7 +64,16 @@ class Database:
             database=os.getenv("MyDb"),
         )
         self._engine = create_engine(self._url, echo=True)
-        # self._metadata_obj = MetaData()
+        Base.metadata.create_all(self._engine)
+
+        with Session(self._engine) as session:
+            test_track = Track()
+            # test_artist = Artist()
+            test_album = Album()
+            session.add(Track)
+            # session.add(Artist)
+            session.add(Album)
+            session.commit()
 
 
 class LibFile:
