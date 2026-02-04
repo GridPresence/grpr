@@ -5,6 +5,7 @@ import json
 
 from typing import Dict, Any
 from pathlib import Path
+import sqlalchemy
 
 from mutagen.mp3 import MP3
 from mutagen.id3 import ID3
@@ -231,4 +232,5 @@ if __name__ == "__main__":
     playlists = Path(os.getenv("PLAYLISTS"))
     print(playlists)
     scan(source=sources)
+    print(f"SQLAlchemy version: {sqlalchemy.__version__}")
     print("--------  Exiting gppy_py")
