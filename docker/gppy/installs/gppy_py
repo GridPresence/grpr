@@ -44,16 +44,6 @@ class Album(Base):
 #         pass
 
 
-class Track(Base):
-    __tablename__ = "tracks"
-
-    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
-
-
-#     def __init__(self):
-#         pass
-
-
 class Database:
     def __init__(self):
         self._url = URL.create(
@@ -63,17 +53,18 @@ class Database:
             host=os.getenv("MyServer"),
             database=os.getenv("MyDb"),
         )
-        self._engine = create_engine(self._url, echo=True)
+        self._engine = create_engine(
+            self._url, echo=True, insertmanyvalues_page_size=100
+        )
         Base.metadata.create_all(self._engine)
+        self._session = Session(self._engine)
 
-        with Session(self._engine) as session:
-            test_track = Track()
-            # test_artist = Artist()
-            test_album = Album()
-            session.add(test_track)
-            # session.add(test_artist)
-            session.add(test_album)
-            session.commit()
+    def __del__(self):
+        self._session.commit()
+
+    def insert(self, fyle: FlacFile):
+        iTrack = Track(fyle)
+        self._session.add(iTrack)
 
 
 class LibFile:
@@ -276,15 +267,61 @@ def walk(spath: Path):
         yield path.resolve()
 
 
-def scan(source: Path):
+def scan(source: Path, target: Database):
     """Run here"""
     fast_run_ctr = 0
     for fyle in walk(spath=source):
         if fyle.suffix in AUDIO_FORMATS:
             print(json.dumps(tags(fyle, source), indent=4, sort_keys=True))
+            tval = tags(fyle, source)
+            target.insert(tval)
         fast_run_ctr += 1
-        if fast_run_ctr > 500:
+        if fast_run_ctr > 10:
             return
+
+
+class Track(Base):
+    __tablename__ = "tracks"
+
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    artist: str = Column(String(128), nullable=False)
+    album: str = Column(String(128), nullable=False)
+    bps: int = Column(Integer(), nullable=False)
+    channels: int = Column(Integer(), nullable=False)
+    length: int = Column(Integer(), nullable=False)
+    rate: int = Column(Integer(), nullable=False)
+    size: int = Column(Integer(), nullable=False)
+    date: str = Column(String(4), nullable=False)
+    disc: str = Column(String(2), nullable=False)
+    disc_total: str = Column(String(2), nullable=False)
+    track: str = Column(String(2), nullable=False)
+    track_total: str = Column(String(2), nullable=False)
+    title: str = Column(String(128), nullable=False)
+    file: str = Column(String(128), nullable=False)
+    path: str = Column(String(255), nullable=False)
+    genre: str = Column(String(32), nullable=False)
+    hires: bool = Column(Boolean(), default=False)
+    valid: bool = Column(Boolean(), default=False)
+
+    def __init__(self, trk: FlacFile):
+        self.artist = trk.artist
+        self.album = trk.album
+        self.bps = trk.bits_per_sample
+        self.channels = trk.channels
+        self.length = trk.length
+        self.rate = trk.sample_rate
+        self.size = trk.size
+        self.date = trk.data
+        self.disc = trk.discnumber
+        self.disc_total = trk.disctotal
+        self.track = trk.tracknumber
+        self.track_total = trk.tracktotal
+        self.title = trk.title
+        self.file = trk.file
+        self.path = trk.path
+        self.genre = trk.genre
+        self.hires = trk.hires
+        self.valid = trk.valid
 
 
 if __name__ == "__main__":
@@ -294,5 +331,5 @@ if __name__ == "__main__":
     print(sources)
     playlists = Path(os.getenv("PLAYLISTS"))
     print(playlists)
-    scan(source=sources)
+    scan(source=sources, target=db)
     print("--------  Exiting gppy_py")
