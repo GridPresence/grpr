@@ -283,7 +283,7 @@ def scan(source: Path):
         if fyle.suffix in AUDIO_FORMATS:
             print(json.dumps(tags(fyle, source), indent=4, sort_keys=True))
         fast_run_ctr += 1
-        if fast_run_ctr > 50:
+        if fast_run_ctr > 500:
             return
 
 
