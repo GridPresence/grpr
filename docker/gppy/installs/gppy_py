@@ -162,6 +162,7 @@ class FlacFile:
             self._mdata["bits_per_sample"] = _info.bits_per_sample
             self._mdata["channels"] = _info.channels
             self._mdata["bitrate"] = _info.bitrate
+            self._mdata["length"] = _info.length
             if (self._mdata["bits_per_sample"] > 16) or (
                 self._mdata["sample_rate"] > 44100
             ):
