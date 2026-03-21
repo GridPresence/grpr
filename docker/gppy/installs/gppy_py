@@ -44,29 +44,6 @@ class Album(Base):
 #         pass
 
 
-class Database:
-    def __init__(self):
-        self._url = URL.create(
-            "mysql+mysqlconnector",
-            username=os.getenv("MyUser"),
-            password=os.getenv("MyPassword"),
-            host=os.getenv("MyServer"),
-            database=os.getenv("MyDb"),
-        )
-        self._engine = create_engine(
-            self._url, echo=True, insertmanyvalues_page_size=100
-        )
-        Base.metadata.create_all(self._engine)
-        self._session = Session(self._engine)
-
-    def __del__(self):
-        self._session.commit()
-
-    def insert(self, fyle: FlacFile):
-        iTrack = Track(fyle)
-        self._session.add(iTrack)
-
-
 class LibFile:
     """
     A description of a library file
@@ -278,6 +255,29 @@ def scan(source: Path, target: Database):
         fast_run_ctr += 1
         if fast_run_ctr > 10:
             return
+
+
+class Database:
+    def __init__(self):
+        self._url = URL.create(
+            "mysql+mysqlconnector",
+            username=os.getenv("MyUser"),
+            password=os.getenv("MyPassword"),
+            host=os.getenv("MyServer"),
+            database=os.getenv("MyDb"),
+        )
+        self._engine = create_engine(
+            self._url, echo=True, insertmanyvalues_page_size=100
+        )
+        Base.metadata.create_all(self._engine)
+        self._session = Session(self._engine)
+
+    def __del__(self):
+        self._session.commit()
+
+    def insert(self, fyle: FlacFile):
+        iTrack = Track(fyle)
+        self._session.add(iTrack)
 
 
 class Track(Base):
