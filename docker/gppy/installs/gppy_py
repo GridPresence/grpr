@@ -244,19 +244,6 @@ def walk(spath: Path):
         yield path.resolve()
 
 
-def scan(source: Path, target: Database):
-    """Run here"""
-    fast_run_ctr = 0
-    for fyle in walk(spath=source):
-        if fyle.suffix in AUDIO_FORMATS:
-            print(json.dumps(tags(fyle, source), indent=4, sort_keys=True))
-            tval = tags(fyle, source)
-            target.insert(tval)
-        fast_run_ctr += 1
-        if fast_run_ctr > 10:
-            return
-
-
 class Database:
     def __init__(self):
         self._url = URL.create(
@@ -322,6 +309,19 @@ class Track(Base):
         self.genre = trk.genre
         self.hires = trk.hires
         self.valid = trk.valid
+
+
+def scan(source: Path, target: Database):
+    """Run here"""
+    fast_run_ctr = 0
+    for fyle in walk(spath=source):
+        if fyle.suffix in AUDIO_FORMATS:
+            print(json.dumps(tags(fyle, source), indent=4, sort_keys=True))
+            tval = tags(fyle, source)
+            target.insert(tval)
+        fast_run_ctr += 1
+        if fast_run_ctr > 10:
+            return
 
 
 if __name__ == "__main__":
