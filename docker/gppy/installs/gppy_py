@@ -144,6 +144,16 @@ class FlacFile:
         return self._mdata["valid"]
 
     @property
+    def artist(self):
+        """Accessor"""
+        return self._mdata["artist"]
+
+    @property
+    def album(self):
+        """Accessor"""
+        return self._mdata["album"]
+
+    @property
     def tags(self):
         """Accessor"""
         return self._mdata
