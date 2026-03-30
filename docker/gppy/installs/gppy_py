@@ -136,8 +136,8 @@ class FlacFile:
             ):
                 self._mdata["hires"] = True
             for k, v in self._flac.tags:
-                print(f'_mdata["', k, '"] = ', v)
                 self._mdata[k] = v
+            print(self._mdata)
 
     @property
     def valid(self):
