@@ -125,7 +125,8 @@ class FlacFile:
         if self._mdata["valid"]:
             self._mdata["size"] = self._sbj.size
             self._flac: FLAC = FLAC(self._sbj.fullpath)
-            _info: StreamInfo = self._flac.info
+            _info: Stre
+            amInfo = self._flac.info
             print(_info)
             self._mdata["sample_rate"] = _info.sample_rate
             self._mdata["bits_per_sample"] = _info.bits_per_sample
@@ -137,6 +138,7 @@ class FlacFile:
             ):
                 self._mdata["hires"] = True
             for k, v in self._flac.tags:
+                print(f'_madata["', k, '"] = ', v)
                 self._mdata[k] = v
 
     @property
