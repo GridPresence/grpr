@@ -27,8 +27,7 @@ class Database:
         self._engine = create_engine(
             self._url, echo=True, insertmanyvalues_page_size=100
         )
-        Track.__table__.drop(self._engine)
-
+        Base.metadata.drop_all(bind=self._engine, tables=[Track.__table__])
         Base.metadata.create_all(self._engine)
         self._session = Session(self._engine)
 
