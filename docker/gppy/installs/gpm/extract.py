@@ -4,6 +4,7 @@ from typing import Dict, Any
 from pathlib import Path
 
 from .audio import AUDIO_FORMATS as AFORMATS
+from .db import Database
 
 
 class Extractor:
