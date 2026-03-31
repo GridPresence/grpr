@@ -122,10 +122,10 @@ class FlacFile:
     #     """Accessor"""
     #     return self._mdata["album"]
 
-    # @property
-    # def tags(self):
-    #     """Accessor"""
-    #     return self._mdata
+    @property
+    def tags(self):
+        """Accessor"""
+        return self._mdata
 
     # @property
     # def sample_rate(self) -> int:
