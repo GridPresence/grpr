@@ -56,7 +56,7 @@ class Track(Base):
     # disc_total: str = Column(String(2), nullable=False)
     track: str = Column(String(2), nullable=False)
     # track_total: str = Column(String(2), nullable=False)
-    title: str = Column(String(128), nullable=False)
+    title: str = Column(String(255), nullable=False)
     file: str = Column(String(255), nullable=False)
     path: str = Column(String(255), nullable=False)
     genre: str = Column(String(32), nullable=False)
