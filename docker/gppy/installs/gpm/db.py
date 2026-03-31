@@ -52,9 +52,9 @@ class Track(Base):
     size: int = Column(Integer(), nullable=False)
     date: str = Column(String(4), nullable=False)
     disc: str = Column(String(2), nullable=False)
-    disc_total: str = Column(String(2), nullable=False)
+    # disc_total: str = Column(String(2), nullable=False)
     track: str = Column(String(2), nullable=False)
-    track_total: str = Column(String(2), nullable=False)
+    # track_total: str = Column(String(2), nullable=False)
     title: str = Column(String(128), nullable=False)
     file: str = Column(String(128), nullable=False)
     path: str = Column(String(255), nullable=False)
@@ -74,9 +74,9 @@ class Track(Base):
         self.size = trk["size"]
         self.date = trk["date"]
         self.disc = trk["discnumber"]
-        self.disc_total = trk["disctotal"]
+        # self.disc_total = trk["disctotal"]
         self.track = trk["tracknumber"]
-        self.track_total = trk["tracktotal"]
+        # self.track_total = trk["tracktotal"]
         self.title = trk["title"]
         self.file = trk["file"]
         self.path = trk["path"]
