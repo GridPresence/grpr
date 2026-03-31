@@ -18,7 +18,7 @@ class Extractor:
                 tval = self.tags(fyle, source)
                 target.insert(tval)
             fast_run_ctr += 1
-            if fast_run_ctr > 10:
+            if fast_run_ctr > 1000:
                 return
 
     def _flac_tags(self, spath: Path, root: Path) -> Dict[str, str]:
