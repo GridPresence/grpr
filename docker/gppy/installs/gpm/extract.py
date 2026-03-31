@@ -10,22 +10,22 @@ class Extractor:
     def __init__(self, source: Path, target: Database):
         """Run here"""
         fast_run_ctr = 0
-        for fyle in walk(spath=source):
+        for fyle in self._walk(spath=source):
             if fyle.suffix in AFORMATS:
-                print(json.dumps(tags(fyle, source), indent=4, sort_keys=True))
-                tval = tags(fyle, source)
+                print(json.dumps(self.tags(fyle, source), indent=4, sort_keys=True))
+                tval = self.tags(fyle, source)
                 target.insert(tval)
             fast_run_ctr += 1
             if fast_run_ctr > 10:
                 return
 
-    def flac_tags(self, spath: Path, root: Path) -> Dict[str, str]:
+    def _flac_tags(self, spath: Path, root: Path) -> Dict[str, str]:
         """Return the tags from a FLAC file"""
         libf = LibFile(spath, root)
         flak = FlacFile(libf)
         return flak.tags
 
-    def mp3_tags(self, spath: Path, root: Path) -> Dict[str, str]:
+    def _mp3_tags(self, spath: Path, root: Path) -> Dict[str, str]:
         """Return the ID3 tags from an MP3 file"""
         retval: Dict[str, str] = {}
         mpthree = MP3(spath)
@@ -52,14 +52,14 @@ class Extractor:
     def tags(self, spath: Path, root: Path) -> Dict[str, str]:
         """Extract relevant tags according to format"""
         if spath.suffix == ".flac":
-            return flac_tags(spath, root)
-        return mp3_tags(spath, root)
+            return self._flac_tags(spath, root)
+        return self._mp3_tags(spath, root)
 
-    def walk(self, spath: Path):
+    def _walk(self, spath: Path):
         """Some stuff"""
         for path in sorted(spath.iterdir(), reverse=False):
             if path.is_dir():
                 print(path)
-                yield from walk(path)
+                yield from self._walk(path)
                 continue
             yield path.resolve()
