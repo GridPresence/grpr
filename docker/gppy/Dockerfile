@@ -26,6 +26,11 @@ RUN ls -l /tmp
 
 RUN python3 -m pip install --break-system-packages --upgrade -r /tmp/requirements.txt
 
+RUN install /tmp/gpm/__init__.py /usr/local/bin/gpm/__init__.py
+RUN install /tmp/gpm/audio.py /usr/local/bin/gpm/audio.py
+RUN install /tmp/gpm/db.py /usr/local/bin/gpm/db.py
+RUN install /tmp/gpm/extract.py /usr/local/bin/gpm/extract.py
+
 RUN install /tmp/gppy_env.sh /usr/local/bin/gppy_env.sh
 RUN install /tmp/gppy_execute /usr/local/bin/gppy_execute
 RUN install /tmp/gppy_py /usr/local/bin/gppy_py
