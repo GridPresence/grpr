@@ -22,6 +22,7 @@ RUN apk add busybox \
 
 
 COPY installs/* /tmp
+RUN ls -l /tmp
 
 RUN python3 -m pip install --break-system-packages --upgrade -r /tmp/requirements.txt
 
