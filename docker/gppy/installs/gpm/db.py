@@ -11,6 +11,10 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
 from .audio import FlacFile
 
 
+class Base(DeclarativeBase):
+    pass
+
+
 class Database:
     def __init__(self):
         self._url = URL.create(
