@@ -20,7 +20,7 @@ RUN apk add busybox \
 # portmidi portmidi-dev \
 # liblo liblo-dev
 
-
+COPY installs/gpm/* /tmp/gpm
 COPY installs/* /tmp
 RUN ls -l /tmp
 
