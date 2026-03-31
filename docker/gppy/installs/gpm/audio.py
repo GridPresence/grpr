@@ -5,7 +5,7 @@ from mutagen.mp3 import MP3
 from mutagen.id3 import ID3
 from mutagen.flac import FLAC, StreamInfo
 
-AUDIO_FORMATS = [".mp3", ".flac"]
+AUDIO_FORMATS = [".flac"]
 PLAYLIST_FORMATS = [".m3u"]
 
 
