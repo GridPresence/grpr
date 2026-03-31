@@ -27,6 +27,7 @@ RUN ls -l /tmp
 
 RUN python3 -m pip install --break-system-packages --upgrade -r /tmp/requirements.txt
 
+RUN mkdir -p /usr/local/bin/gpm
 RUN install /tmp/gpm/__init__.py /usr/local/bin/gpm/__init__.py
 RUN install /tmp/gpm/audio.py /usr/local/bin/gpm/audio.py
 RUN install /tmp/gpm/db.py /usr/local/bin/gpm/db.py
