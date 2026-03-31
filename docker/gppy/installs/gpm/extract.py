@@ -25,7 +25,7 @@ class Extractor:
                     outrctr += 1
                     target._session.commit()
                     ctr = 0
-                    print(str(outrctr * LIMIT))
+                    print(str(outrctr * LIMIT), flush=True)
 
     def _flac_tags(self, spath: Path, root: Path) -> Dict[str, str]:
         """Return the tags from a FLAC file"""
