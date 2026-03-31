@@ -104,67 +104,70 @@ class FlacFile:
                 self._mdata[k] = v
             print(self._mdata)
 
-    @property
-    def valid(self):
-        """Accessor"""
-        return self._mdata["valid"]
+    def __getitem__(self, key):
+        return self._mdata[key]
 
-    @property
-    def artist(self):
-        """Accessor"""
-        return self._mdata["artist"]
+    # @property
+    # def valid(self):
+    #     """Accessor"""
+    #     return self._mdata["valid"]
 
-    @property
-    def album(self):
-        """Accessor"""
-        return self._mdata["album"]
+    # @property
+    # def artist(self):
+    #     """Accessor"""
+    #     return self._mdata["artist"]
 
-    @property
-    def tags(self):
-        """Accessor"""
-        return self._mdata
+    # @property
+    # def album(self):
+    #     """Accessor"""
+    #     return self._mdata["album"]
 
-    @property
-    def sample_rate(self) -> int:
-        """Accessor"""
-        if self.valid:
-            return self._mdata["sample_rate"]
-        return -1
+    # @property
+    # def tags(self):
+    #     """Accessor"""
+    #     return self._mdata
 
-    @property
-    def bits_per_sample(self) -> int:
-        """Accessor"""
-        if self.valid:
-            return self._mdata["bits_per_sample"]
-        return -1
+    # @property
+    # def sample_rate(self) -> int:
+    #     """Accessor"""
+    #     if self.valid:
+    #         return self._mdata["sample_rate"]
+    #     return -1
 
-    @property
-    def channels(self) -> int:
-        """Accessor"""
-        if self.valid:
-            return self._mdata["channels"]
-        return -1
+    # @property
+    # def bits_per_sample(self) -> int:
+    #     """Accessor"""
+    #     if self.valid:
+    #         return self._mdata["bits_per_sample"]
+    #     return -1
 
-    @property
-    def bitrate(self) -> int:
-        """Accessor"""
-        if self.valid:
-            return self._mdata["bitrate"]
-        return -1
+    # @property
+    # def channels(self) -> int:
+    #     """Accessor"""
+    #     if self.valid:
+    #         return self._mdata["channels"]
+    #     return -1
 
-    @property
-    def hires(self) -> bool:
-        """Accessor"""
-        if self.valid:
-            return self._mdata["hires"]
-        return False
+    # @property
+    # def bitrate(self) -> int:
+    #     """Accessor"""
+    #     if self.valid:
+    #         return self._mdata["bitrate"]
+    #     return -1
 
-    @property
-    def genre(self) -> str:
-        """Accessor"""
-        if self.valid:
-            return self._mdata["genre"]
-        return "NULL"
+    # @property
+    # def hires(self) -> bool:
+    #     """Accessor"""
+    #     if self.valid:
+    #         return self._mdata["hires"]
+    #     return False
+
+    # @property
+    # def genre(self) -> str:
+    #     """Accessor"""
+    #     if self.valid:
+    #         return self._mdata["genre"]
+    #     return "NULL"
 
     def __str__(self) -> str:
         tstr = json.dumps(self._mdata, indent=4, sort_keys=True)
