@@ -11,15 +11,16 @@ class Extractor:
 
     def __init__(self, source: Path, target: Database):
         """Run here"""
-        fast_run_ctr = 0
+        ctr = 0
         for fyle in self._walk(spath=source):
             if fyle.suffix in AFORMATS:
                 # print(json.dumps(self.tags(fyle, source), indent=4,sort_keys=True))
                 tval = self.tags(fyle, source)
                 target.insert(tval)
-            # fast_run_ctr += 1
-            # if fast_run_ctr > 1000:
-            #    return
+                ctr += 1
+                if ctr > 99:
+                    target._session.commit()
+                    ctr = 0
 
     def _flac_tags(self, spath: Path, root: Path) -> Dict[str, str]:
         """Return the tags from a FLAC file"""
