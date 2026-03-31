@@ -102,6 +102,9 @@ class FlacFile:
                 self._mdata["hires"] = True
             for k, v in self._flac.tags:
                 self._mdata[k.lower()] = v
+            if len(self._mdata["date"]) > 4:
+                temp = self._mdata["date"]
+                self._mdata["date"] = temp[:4]
             # print(self._mdata)
 
     def __getitem__(self, key):
