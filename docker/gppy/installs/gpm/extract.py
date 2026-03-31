@@ -3,6 +3,7 @@ from typing import Dict, Any
 from pathlib import Path
 
 from .audio import AUDIO_FORMATS as AFORMATS
+from .audio import LibFile, FlacFile
 from .db import Database
 
 
