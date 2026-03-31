@@ -6,6 +6,8 @@ from .audio import AUDIO_FORMATS as AFORMATS
 from .audio import LibFile, FlacFile
 from .db import Database
 
+LIMIT = 500
+
 
 class Extractor:
 
@@ -18,7 +20,7 @@ class Extractor:
                 tval = self.tags(fyle, source)
                 target.insert(tval)
                 ctr += 1
-                if ctr > 99:
+                if ctr > LIMIT:
                     target._session.commit()
                     ctr = 0
 
