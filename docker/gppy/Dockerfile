@@ -23,7 +23,6 @@ RUN apk add busybox \
 RUN mkdir -p /tmp/gpm
 COPY installs/gpm/* /tmp/gpm
 COPY installs/* /tmp
-RUN ls -l /tmp
 
 RUN python3 -m pip install --break-system-packages --upgrade -r /tmp/requirements.txt
 
@@ -51,7 +50,5 @@ RUN mkdir -p Playlists
 ENV PLAYLISTS=/home/$SERVICE_NAME/Playlists
 RUN chown -R $SERVICE_NAME:$SERVICE_NAME /home/$SERVICE_NAME
 USER $SERVICE_NAME
-# RUN ls -l /tmp
-# RUN ls -l /usr/local/bin
 
 CMD ["ash", "/usr/local/bin/gppy_execute"]

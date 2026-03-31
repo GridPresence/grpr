@@ -1,3 +1,6 @@
+from typing import Dict, Any
+from pathlib import Path
+
 from mutagen.mp3 import MP3
 from mutagen.id3 import ID3
 from mutagen.flac import FLAC, StreamInfo
