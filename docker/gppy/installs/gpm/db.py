@@ -11,30 +11,6 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
 from .audio import FlacFile
 
 
-class Base(DeclarativeBase):
-    pass
-
-
-# class Artist(Base):
-#     __tablename__ = "artists"
-
-#     id: Mapped[str] = mapped_column(primary_key=True)
-
-
-#     def __init__(self):
-#         pass
-
-
-class Album(Base):
-    __tablename__ = "albums"
-
-    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
-
-
-#     def __init__(self):
-#         pass
-
-
 class Database:
     def __init__(self):
         self._url = URL.create(
@@ -49,6 +25,7 @@ class Database:
         )
         Base.metadata.create_all(self._engine)
         self._session = Session(self._engine)
+        Track.__table__.drop(self._engine)
 
     def __del__(self):
         self._session.commit()
@@ -82,8 +59,8 @@ class Track(Base):
     valid: bool = Column(Boolean(), default=False)
 
     def __init__(self, trk: FlacFile):
-        print("TRK")
-        print(trk)
+        # print("TRK")
+        # print(trk)
         self.artist = trk["artist"]
         self.album = trk["album"]
         self.bps = trk["bits_per_sample"]

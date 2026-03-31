@@ -14,7 +14,7 @@ class Extractor:
         fast_run_ctr = 0
         for fyle in self._walk(spath=source):
             if fyle.suffix in AFORMATS:
-                print(json.dumps(self.tags(fyle, source), indent=4, sort_keys=True))
+                # print(json.dumps(self.tags(fyle, source), indent=4,sort_keys=True))
                 tval = self.tags(fyle, source)
                 target.insert(tval)
             fast_run_ctr += 1
@@ -61,7 +61,7 @@ class Extractor:
         """Some stuff"""
         for path in sorted(spath.iterdir(), reverse=False):
             if path.is_dir():
-                print(path)
+                # print(path)
                 yield from self._walk(path)
                 continue
             yield path.resolve()
