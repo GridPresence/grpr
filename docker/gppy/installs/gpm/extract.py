@@ -17,9 +17,9 @@ class Extractor:
                 # print(json.dumps(self.tags(fyle, source), indent=4,sort_keys=True))
                 tval = self.tags(fyle, source)
                 target.insert(tval)
-            fast_run_ctr += 1
-            if fast_run_ctr > 1000:
-                return
+            # fast_run_ctr += 1
+            # if fast_run_ctr > 1000:
+            #    return
 
     def _flac_tags(self, spath: Path, root: Path) -> Dict[str, str]:
         """Return the tags from a FLAC file"""

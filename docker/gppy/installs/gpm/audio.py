@@ -102,7 +102,7 @@ class FlacFile:
                 self._mdata["hires"] = True
             for k, v in self._flac.tags:
                 self._mdata[k.lower()] = v
-            print(self._mdata)
+            # print(self._mdata)
 
     def __getitem__(self, key):
         return self._mdata[key]
