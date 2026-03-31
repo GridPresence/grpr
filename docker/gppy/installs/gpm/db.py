@@ -6,6 +6,7 @@ from uuid import UUID, uuid4
 from sqlalchemy import create_engine, URL, MetaData
 from sqlalchemy import Table, Column, Integer, String, Boolean
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
+from .audio import FlacFile
 
 
 class Base(DeclarativeBase):
