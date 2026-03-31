@@ -82,6 +82,8 @@ class Track(Base):
     valid: bool = Column(Boolean(), default=False)
 
     def __init__(self, trk: FlacFile):
+        print("TRK")
+        print(trk)
         self.artist = trk.artist
         self.album = trk.album
         self.bps = trk.bits_per_sample
