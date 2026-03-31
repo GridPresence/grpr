@@ -85,20 +85,20 @@ class Track(Base):
         print("TRK")
         print(trk)
         self.artist = trk["artist"]
-        self.album = trk.album
-        self.bps = trk.bits_per_sample
-        self.channels = trk.channels
-        self.length = trk.length
-        self.rate = trk.sample_rate
-        self.size = trk.size
-        self.date = trk.data
-        self.disc = trk.discnumber
-        self.disc_total = trk.disctotal
-        self.track = trk.tracknumber
-        self.track_total = trk.tracktotal
-        self.title = trk.title
-        self.file = trk.file
-        self.path = trk.path
-        self.genre = trk.genre
-        self.hires = trk.hires
-        self.valid = trk.valid
+        self.album = trk["album"]
+        self.bps = trk["bits_per_sample"]
+        self.channels = trk["channels"]
+        self.length = trk["length"]
+        self.rate = trk["sample_rate"]
+        self.size = trk["size"]
+        self.date = trk["date"]
+        self.disc = trk["discnumber"]
+        self.disc_total = trk["disctotal"]
+        self.track = trk["tracknumber"]
+        self.track_total = trk["tracktotal"]
+        self.title = trk["title"]
+        self.file = trk["file"]
+        self.path = trk["path"]
+        self.genre = trk["genre"]
+        self.hires = trk["hires"]
+        self.valid = trk["valid"]
