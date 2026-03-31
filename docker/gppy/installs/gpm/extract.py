@@ -6,7 +6,7 @@ from .audio import AUDIO_FORMATS as AFORMATS
 from .audio import LibFile, FlacFile
 from .db import Database
 
-LIMIT = 500
+LIMIT = 567
 
 
 class Extractor:
@@ -14,6 +14,7 @@ class Extractor:
     def __init__(self, source: Path, target: Database):
         """Run here"""
         ctr = 0
+        outrctr = 0
         for fyle in self._walk(spath=source):
             if fyle.suffix in AFORMATS:
                 # print(json.dumps(self.tags(fyle, source), indent=4,sort_keys=True))
@@ -21,8 +22,10 @@ class Extractor:
                 target.insert(tval)
                 ctr += 1
                 if ctr > LIMIT:
+                    outrctr += 1
                     target._session.commit()
                     ctr = 0
+                    print(str(outrctr * LIMIT))
 
     def _flac_tags(self, spath: Path, root: Path) -> Dict[str, str]:
         """Return the tags from a FLAC file"""

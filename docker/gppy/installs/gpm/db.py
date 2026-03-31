@@ -27,7 +27,7 @@ class Database:
         # self._engine = create_engine(
         #     self._url, echo=True, insertmanyvalues_page_size=100
         # )
-        self._engine = create_engine(self._url, echo=True)
+        self._engine = create_engine(self._url, echo=False)
         Base.metadata.drop_all(bind=self._engine, tables=[Track.__table__])
         Base.metadata.create_all(self._engine)
         self._session = Session(self._engine)
@@ -56,9 +56,9 @@ class Track(Base):
     # disc_total: str = Column(String(2), nullable=False)
     track: str = Column(String(2), nullable=False)
     # track_total: str = Column(String(2), nullable=False)
-    title: str = Column(String(255), nullable=False)
-    file: str = Column(String(255), nullable=False)
-    path: str = Column(String(255), nullable=False)
+    title: str = Column(String(511), nullable=False)
+    file: str = Column(String(511), nullable=False)
+    path: str = Column(String(511), nullable=False)
     genre: str = Column(String(32), nullable=False)
     hires: bool = Column(Boolean(), default=False)
     valid: bool = Column(Boolean(), default=False)
