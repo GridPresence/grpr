@@ -24,9 +24,10 @@ class Database:
             host=os.getenv("MyServer"),
             database=os.getenv("MyDb"),
         )
-        self._engine = create_engine(
-            self._url, echo=True, insertmanyvalues_page_size=100
-        )
+        # self._engine = create_engine(
+        #     self._url, echo=True, insertmanyvalues_page_size=100
+        # )
+        self._engine = create_engine(self._url, echo=True)
         Base.metadata.drop_all(bind=self._engine, tables=[Track.__table__])
         Base.metadata.create_all(self._engine)
         self._session = Session(self._engine)
