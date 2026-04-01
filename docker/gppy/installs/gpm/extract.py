@@ -6,7 +6,7 @@ from .audio import AUDIO_FORMATS as AFORMATS
 from .audio import LibFile, FlacFile
 from .db import Database
 
-LIMIT = 567
+LIMIT = 1000
 
 
 class Extractor:
