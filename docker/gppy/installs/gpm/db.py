@@ -58,7 +58,7 @@ class Track(Base):
     date: str = Column(String(4), nullable=False)
     disc: str = Column(String(2), nullable=False)
     # disc_total: str = Column(String(2), nullable=False)
-    track: str = Column(String(2), nullable=False)
+    track: str = Column(String(3), nullable=False)
     # track_total: str = Column(String(2), nullable=False)
     title: str = Column(String(511), nullable=False)
     file: str = Column(String(511), nullable=False)
