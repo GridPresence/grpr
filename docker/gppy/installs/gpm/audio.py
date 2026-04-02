@@ -1,3 +1,4 @@
+import json
 from typing import Dict, Any
 from pathlib import Path
 
@@ -81,31 +82,36 @@ class FlacFile:
     def __init__(self, sbj: LibFile):
         self._sbj: LibFile = sbj
         self._mdata: Dict[str, Any] = {}
-        self._mdata["path"] = str(self._sbj.path)
-        self._mdata["file"] = self._sbj.path.name
-        self._mdata["valid"] = False
-        self._mdata["hires"] = False
-        if (self._sbj.exists) and (self._sbj.suffix == ".flac"):
-            self._mdata["valid"] = True
-        if self._mdata["valid"]:
-            self._mdata["size"] = self._sbj.size
-            self._flac: FLAC = FLAC(self._sbj.fullpath)
-            _info: StreamInfo = self._flac.info
-            self._mdata["sample_rate"] = _info.sample_rate
-            self._mdata["bits_per_sample"] = _info.bits_per_sample
-            self._mdata["channels"] = _info.channels
-            self._mdata["bitrate"] = _info.bitrate
-            self._mdata["length"] = (int)(_info.length + 1)
-            if (self._mdata["bits_per_sample"] > 16) or (
-                self._mdata["sample_rate"] > 44100
-            ):
-                self._mdata["hires"] = True
-            for k, v in self._flac.tags:
-                self._mdata[k.lower()] = v
-            if len(self._mdata["date"]) > 4:
-                temp = self._mdata["date"]
-                self._mdata["date"] = temp[:4]
+        try:
+            self._mdata["path"] = str(self._sbj.path)
+            self._mdata["file"] = self._sbj.path.name
+            self._mdata["valid"] = False
+            self._mdata["hires"] = False
+            if (self._sbj.exists) and (self._sbj.suffix == ".flac"):
+                self._mdata["valid"] = True
+            if self._mdata["valid"]:
+                self._mdata["size"] = self._sbj.size
+                self._flac: FLAC = FLAC(self._sbj.fullpath)
+                _info: StreamInfo = self._flac.info
+                self._mdata["sample_rate"] = _info.sample_rate
+                self._mdata["bits_per_sample"] = _info.bits_per_sample
+                self._mdata["channels"] = _info.channels
+                self._mdata["bitrate"] = _info.bitrate
+                self._mdata["length"] = (int)(_info.length + 1)
+                if (self._mdata["bits_per_sample"] > 16) or (
+                    self._mdata["sample_rate"] > 44100
+                ):
+                    self._mdata["hires"] = True
+                for k, v in self._flac.tags:
+                    self._mdata[k.lower()] = v
+                if len(self._mdata["date"]) > 4:
+                    temp = self._mdata["date"]
+                    self._mdata["date"] = temp[:4]
             # print(self._mdata)
+        except KeyError as e:
+            print(self._mdata)
+            print("Missing key: {e.args[0]}")
+            raise (e)
 
     def __getitem__(self, key):
         return self._mdata[key]

@@ -18,14 +18,17 @@ class Extractor:
         for fyle in self._walk(spath=source):
             if fyle.suffix in AFORMATS:
                 # print(json.dumps(self.tags(fyle, source), indent=4,sort_keys=True))
-                tval = self.tags(fyle, source)
-                target.insert(tval)
-                ctr += 1
-                if ctr > LIMIT:
-                    outrctr += 1
-                    target._session.commit()
-                    ctr = 0
-                    print(str(outrctr * LIMIT), flush=True)
+                try:
+                    tval = self.tags(fyle, source)
+                    target.insert(tval)
+                    ctr += 1
+                    if ctr > LIMIT:
+                        outrctr += 1
+                        target._session.commit()
+                        ctr = 0
+                        print(str(outrctr * LIMIT), flush=True)
+                except KeyError:
+                    pass
 
     def _flac_tags(self, spath: Path, root: Path) -> Dict[str, str]:
         """Return the tags from a FLAC file"""
