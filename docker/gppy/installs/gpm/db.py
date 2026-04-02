@@ -28,9 +28,13 @@ class Database:
         #     self._url, echo=True, insertmanyvalues_page_size=100
         # )
         self._engine = create_engine(self._url, echo=False)
+        print("Engine created")
         Base.metadata.drop_all(bind=self._engine, tables=[Track.__table__])
+        print("Tracks table dropped")
         Base.metadata.create_all(self._engine)
+        print("Tracks table created")
         self._session = Session(self._engine)
+        print("Session created", flush=True)
 
     def __del__(self):
         self._session.commit()
