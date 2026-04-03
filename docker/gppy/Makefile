@@ -7,7 +7,7 @@ DKRSRCS := --mount type=bind,src=${MNTSRCS},dst=/home/gppy/Sources,ro
 DKRDEST := --mount type=bind,src=${MNTPLAYS},dst=/home/gppy/Playlists
 
 .PHONY: catalog
-catalog: installs/gppy_py
+catalog: installs/gppy_catalog
 		DOCKER_BUILDKIT=1 ${DOCKR} build -t ${TARGET}-${T1} -f DF-${T1} .
 
 .PHONY: clean-catalog
