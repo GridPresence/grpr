@@ -5,7 +5,7 @@ git fetch
 git pull
 echo "kurgan_exec : "$(pwd)
 pushd docker/gppy
-make image-catalog
+make catalog
 make exec-catalog
 popd
 echo "---- Exiting kurgan_exec"
