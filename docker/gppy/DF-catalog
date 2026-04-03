@@ -13,12 +13,6 @@ RUN apk update; \
 RUN apk add busybox \
     curl \
     wget
-# pyo dependencies
-# RUN apk add gcc libc-dev
-# portaudio portaudio-dev \
-# libsndfile libsndfile-dev \
-# portmidi portmidi-dev \
-# liblo liblo-dev
 
 RUN mkdir -p /tmp/gpm
 COPY installs/gpm/* /tmp/gpm
@@ -33,8 +27,10 @@ RUN install /tmp/gpm/db.py /usr/local/bin/gpm/db.py
 RUN install /tmp/gpm/extract.py /usr/local/bin/gpm/extract.py
 
 RUN install /tmp/gppy_env.sh /usr/local/bin/gppy_env.sh
-RUN install /tmp/gppy_execute /usr/local/bin/gppy_execute
-RUN install /tmp/gppy_py /usr/local/bin/gppy_py
+
+RUN install /tmp/gppy_catalog /usr/local/bin/gppy_catalog
+RUN install /tmp/gppy_exec_catalog /usr/local/bin/gppy_exec_catalog
+
 
 # FROM base
 # COPY --from=builder /install /usr/local
@@ -51,4 +47,4 @@ ENV PLAYLISTS=/home/$SERVICE_NAME/Playlists
 RUN chown -R $SERVICE_NAME:$SERVICE_NAME /home/$SERVICE_NAME
 USER $SERVICE_NAME
 
-CMD ["ash", "/usr/local/bin/gppy_execute"]
+CMD ["ash", "/usr/local/bin/gppy_exec_catalog"]

@@ -14,6 +14,6 @@ echo "Mount some workspace volumes hereabouts"
 #ls -l Sources
 #ls -l Playlists
 
-gppy_py
+gppy_catalog
 
 echo "--------  Exiting gppy_execute"
