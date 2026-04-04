@@ -75,7 +75,11 @@ class Track(Base):
     def __init__(self, trk: FlacFile):
         # print("TRK")
         # print(trk)
-        self.artist = trk["artist"]
+        try:
+            self.artist = trk["albumartist"]
+        except KeyError:
+            self.artist = trk["artist"]
+
         self.album = trk["album"]
         self.bps = trk["bits_per_sample"]
         self.channels = trk["channels"]
