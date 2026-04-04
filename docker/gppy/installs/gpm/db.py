@@ -16,7 +16,7 @@ class Base(DeclarativeBase):
 
 
 class Database:
-    def __init__(self, bool: refresh = False):
+    def __init__(self, refresh: bool = False):
         self._url = URL.create(
             "mysql+mysqlconnector",
             username=os.getenv("MyUser"),
