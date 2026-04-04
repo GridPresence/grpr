@@ -107,7 +107,7 @@ class FlacFile:
                 if len(self._mdata["date"]) > 4:
                     temp = self._mdata["date"]
                     self._mdata["date"] = temp[:4]
-            # print(self._mdata)
+            print(self._mdata)
         except KeyError as e:
             print(self._mdata)
             print("Missing key: {e.args[0]}")
