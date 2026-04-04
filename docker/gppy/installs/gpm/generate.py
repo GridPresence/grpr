@@ -16,5 +16,6 @@ class Generator:
         self._get_artists()
 
     def _get_artists(self):
-        self._artists = self._session.query(Track.artist)
+        for value in self._session.query(Track.artist).distinct():
+            self._artists.append(value)
         print(self._artists)
