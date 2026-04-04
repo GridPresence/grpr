@@ -18,7 +18,7 @@ RUN mkdir -p /tmp/gpm
 COPY installs/gpm/* /tmp/gpm
 COPY installs/* /tmp
 
-RUN python3 -m pip install --break-system-packages --upgrade -r /tmp/requirements.txt
+RUN python3 -m pip install --break-system-packages --upgrade -r /tmp/reqs-playgen.txt
 
 RUN mkdir -p /usr/local/bin/gpm
 RUN install /tmp/gpm/__init__.py /usr/local/bin/gpm/__init__.py
@@ -28,8 +28,8 @@ RUN install /tmp/gpm/extract.py /usr/local/bin/gpm/extract.py
 
 RUN install /tmp/gppy_env.sh /usr/local/bin/gppy_env.sh
 
-RUN install /tmp/gppy_catalog /usr/local/bin/gppy_catalog
-RUN install /tmp/gppy_exec_catalog /usr/local/bin/gppy_exec_catalog
+RUN install /tmp/gppy_playgen /usr/local/bin/gppy_playgen
+RUN install /tmp/gppy_exec_playgen /usr/local/bin/gppy_exec_playgen
 
 
 # FROM base
@@ -47,4 +47,4 @@ ENV PLAYLISTS=/home/$SERVICE_NAME/Playlists
 RUN chown -R $SERVICE_NAME:$SERVICE_NAME /home/$SERVICE_NAME
 USER $SERVICE_NAME
 
-CMD ["ash", "/usr/local/bin/gppy_exec_catalog"]
+CMD ["ash", "/usr/local/bin/gppy_exec_playgen"]

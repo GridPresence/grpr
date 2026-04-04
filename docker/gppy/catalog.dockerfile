@@ -18,7 +18,7 @@ RUN mkdir -p /tmp/gpm
 COPY installs/gpm/* /tmp/gpm
 COPY installs/* /tmp
 
-RUN python3 -m pip install --break-system-packages --upgrade -r /tmp/requirements.txt
+RUN python3 -m pip install --break-system-packages --upgrade -r /tmp/reqs-catalog.txt
 
 RUN mkdir -p /usr/local/bin/gpm
 RUN install /tmp/gpm/__init__.py /usr/local/bin/gpm/__init__.py
