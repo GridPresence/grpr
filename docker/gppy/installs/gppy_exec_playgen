@@ -1,0 +1,19 @@
+echo "-------- Entering gppy_execute"
+. /usr/local/bin/gppy_env.sh
+python3 -m pip install -r /tmp/requirements.txt --upgrade -q
+#grpr util config-local
+# Useful visual confirmations
+echo "     PATH = "$PATH
+echo "   WORKDIR = "$(pwd)
+echo "  MyServer = "$MyServer
+echo "    MyUser = "$MyUser
+#echo "MyPassword = "$MyPassword
+echo "Mount some workspace volumes hereabouts"
+#df -BG
+#ls -l 
+#ls -l Sources
+#ls -l Playlists
+
+gppy_catalog
+
+echo "--------  Exiting gppy_execute"

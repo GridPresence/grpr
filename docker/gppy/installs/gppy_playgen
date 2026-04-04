@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+
+import os
+import json
+import time
+from pathlib import Path
+
+from gpm.extract import Extractor
+from gpm.db import Database
+
+if __name__ == "__main__":
+    print("-------- Entering gppy_py")
+    db = Database()
+    sources = Path(os.getenv("FLACSRCS"))
+    print(sources)
+    playlists = Path(os.getenv("PLAYLISTS"))
+    print(playlists)
+    diskard = Extractor(source=sources, target=db)
+    print("--------  Exiting gppy_py")
