@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-echo "---- Executing kurgan_exec"
+echo "---- Executing catalog_exec"
 # pushd $HOME/Code/grpr
 git fetch
 git pull
-echo "kurgan_exec : "$(pwd)
+echo "catalog_exec : "$(pwd)
 pushd docker/gppy
 make catalog
 make exec-catalog
 popd
-echo "---- Exiting kurgan_exec"
+echo "---- Exiting catalog_exec"

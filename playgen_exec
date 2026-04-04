@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+echo "---- Executing playgen_exec"
+# pushd $HOME/Code/grpr
+git fetch
+git pull
+echo "playgen_exec : "$(pwd)
+pushd docker/gppy
+make playgen
+make exec-playgen
+popd
+echo "---- Exiting playgen_exec"

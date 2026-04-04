@@ -8,11 +8,11 @@ DKRDEST := --mount type=bind,src=${MNTPLAYS},dst=/home/gppy/Playlists
 
 .PHONY: catalog
 catalog: installs/gppy_catalog
-		DOCKER_BUILDKIT=1 ${DOCKR} build -t ${TARGET}-${T1} -f DF-${T1} .
+		DOCKER_BUILDKIT=1 ${DOCKR} build -t ${TARGET}-${T1} -f ${T1}.dockerfile .
 
 .PHONY: clean-catalog
 clean-catalog:
-		DOCKER_BUILDKIT=1 ${DOCKR} build --no-cache -t ${TARGET}-${T1} -f DF-${T1} .
+		DOCKER_BUILDKIT=1 ${DOCKR} build --no-cache -t ${TARGET}-${T1} -f ${T1}.dockerfile .
 
 .PHONY: exec-catalog
 exec-catalog:
@@ -20,11 +20,11 @@ exec-catalog:
 
 .PHONY: playgen
 playgen: installs/gppy_py
-		DOCKER_BUILDKIT=1 ${DOCKR} build -t ${TARGET}-${T2} -f DF-${T2} .
+		DOCKER_BUILDKIT=1 ${DOCKR} build -t ${TARGET}-${T2} -f ${T2}.dockerfile .
 
 .PHONY: clean-playgen
 clean-playgen:
-		DOCKER_BUILDKIT=1 ${DOCKR} build --no-cache -t ${TARGET}-${T2} -f DF-${T2} .
+		DOCKER_BUILDKIT=1 ${DOCKR} build --no-cache -t ${TARGET}-${T2} -f ${T2}.dockerfile .
 
 .PHONY: exec-playgen
 exec-playgen:
