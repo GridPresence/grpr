@@ -24,6 +24,7 @@ RUN mkdir -p /usr/local/bin/gpm
 RUN install /tmp/gpm/__init__.py /usr/local/bin/gpm/__init__.py
 RUN install /tmp/gpm/audio.py /usr/local/bin/gpm/audio.py
 RUN install /tmp/gpm/db.py /usr/local/bin/gpm/db.py
+RUN install /tmp/gpm/generate.py /usr/local/bin/gpm/generate.py
 RUN install /tmp/gpm/extract.py /usr/local/bin/gpm/extract.py
 
 RUN install /tmp/gppy_env.sh /usr/local/bin/gppy_env.sh

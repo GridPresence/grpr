@@ -5,5 +5,5 @@ packaging
 truststore 
 sqlalchemy
 mysql-connector-python
-
+mutagen
 
