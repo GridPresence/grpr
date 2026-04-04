@@ -9,11 +9,11 @@ from gpm.extract import Extractor
 from gpm.db import Database
 
 if __name__ == "__main__":
-    print("-------- Entering gppy_py")
-    db = Database()
+    print("-------- Entering gppy_catalog")
+    db = Database(refresh=True)
     sources = Path(os.getenv("FLACSRCS"))
     print(sources)
     playlists = Path(os.getenv("PLAYLISTS"))
     print(playlists)
     diskard = Extractor(source=sources, target=db)
-    print("--------  Exiting gppy_py")
+    print("--------  Exiting gppy_catalog")

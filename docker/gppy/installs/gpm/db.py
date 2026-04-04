@@ -16,7 +16,7 @@ class Base(DeclarativeBase):
 
 
 class Database:
-    def __init__(self):
+    def __init__(self, bool: refresh = False):
         self._url = URL.create(
             "mysql+mysqlconnector",
             username=os.getenv("MyUser"),
@@ -29,8 +29,9 @@ class Database:
         # )
         self._engine = create_engine(self._url, echo=False)
         print("Engine created")
-        Base.metadata.drop_all(bind=self._engine, tables=[Track.__table__])
-        print("Tracks table dropped")
+        if refresh is True:
+            Base.metadata.drop_all(bind=self._engine, tables=[Track.__table__])
+            print("Tracks table dropped")
         Base.metadata.create_all(self._engine)
         print("Tracks table created")
         self._session = Session(self._engine)
