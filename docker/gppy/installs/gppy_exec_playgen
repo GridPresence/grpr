@@ -1,6 +1,6 @@
 echo "-------- Entering gppy_exec_playpen"
 . /usr/local/bin/gppy_env.sh
-python3 -m pip install -r /tmp/playpen-reqs.txt --upgrade -q
+python3 -m pip install -r /tmp/reqs-playgen.txt --upgrade -q
 #grpr util config-local
 # Useful visual confirmations
 echo "     PATH = "$PATH
