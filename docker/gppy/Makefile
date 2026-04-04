@@ -19,7 +19,7 @@ exec-catalog:
 		${DOCKR} run ${DKRENVS} ${DKRSRCS} ${DKRDEST} ${TARGET}-${T1}
 
 .PHONY: playgen
-playgen: installs/gppy_py
+playgen: installs/gppy_playgen
 		DOCKER_BUILDKIT=1 ${DOCKR} build -t ${TARGET}-${T2} -f ${T2}.dockerfile .
 
 .PHONY: clean-playgen
