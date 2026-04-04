@@ -1,6 +1,6 @@
-echo "-------- Entering gppy_execute"
+echo "-------- Entering gppy_exec_playpen"
 . /usr/local/bin/gppy_env.sh
-python3 -m pip install -r /tmp/requirements.txt --upgrade -q
+python3 -m pip install -r /tmp/playpen-reqs.txt --upgrade -q
 #grpr util config-local
 # Useful visual confirmations
 echo "     PATH = "$PATH
@@ -16,4 +16,4 @@ echo "Mount some workspace volumes hereabouts"
 
 gppy_playgen
 
-echo "--------  Exiting gppy_execute"
+echo "--------  Exiting gppy_exec_playpen"
