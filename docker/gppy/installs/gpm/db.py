@@ -40,6 +40,10 @@ class Database:
     def __del__(self):
         self._session.commit()
 
+    @property
+    def session(self):
+        return self._session
+
     def insert(self, fyle: FlacFile):
         iTrack = Track(fyle)
         self._session.add(iTrack)
