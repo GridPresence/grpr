@@ -12,7 +12,8 @@ RUN apk update; \
     apk upgrade
 RUN apk add busybox \
     curl \
-    wget
+    wget \
+    nfs-utils
 
 RUN mkdir -p /tmp/gpm
 COPY installs/gpm/* /tmp/gpm
