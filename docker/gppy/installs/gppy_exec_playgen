@@ -16,6 +16,6 @@ echo "Mount some workspace volumes hereabouts"
 
 gppy_playgen
 
-cp /etc/fstab fstab
+cat /etc/fstab
 
 echo "--------  Exiting gppy_exec_playpen"
