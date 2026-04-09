@@ -17,5 +17,6 @@ echo "Mount some workspace volumes hereabouts"
 gppy_playgen
 
 cat /etc/fstab
+which mount.nfs
 
 echo "--------  Exiting gppy_exec_playpen"
