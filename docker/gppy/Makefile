@@ -29,7 +29,7 @@ clean-catalog:
 		DOCKER_BUILDKIT=1 ${DOCKR} build --no-cache -t ${TARGET}-${T1} -f ${T1}.dockerfile .
 
 .PHONY: exec-catalog
-exec-catalog: nfs
+exec-catalog:
 		${DOCKR} run ${DKRENVS} ${DKRVOLMNT} ${TARGET}-${T1}
 
 .PHONY: playgen
@@ -41,18 +41,15 @@ clean-playgen:
 		DOCKER_BUILDKIT=1 ${DOCKR} build --no-cache -t ${TARGET}-${T2} -f ${T2}.dockerfile .
 
 .PHONY: exec-playgen
-exec-playgen: nfs
+exec-playgen:
 		${DOCKR} run ${DKRENVS} ${DKRVOLMNT} ${TARGET}-${T2}
 
 .PHONY: proto
 proto: installs/gppy_playgen
-		
 		DOCKER_BUILDKIT=1 ${DOCKR} build -t ${TARGET}-${T3} -f ${T3}.dockerfile .
 
 .PHONY: clean-proto
 clean-proto:
-		${DOCKR} volume rm nas
-		${DOCKR} volume create ${DKRVOL} nas
 		DOCKER_BUILDKIT=1 ${DOCKR} build --no-cache -t ${TARGET}-${T3} -f ${T3}.dockerfile .
 
 .PHONY: exec-proto
