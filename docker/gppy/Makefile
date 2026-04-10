@@ -6,8 +6,15 @@ T3 := proto
 DOCKR ?= docker
 
 DKRENVS := -e MyServer=${DBSRVR} -e MyUser=${DBUSR} -e MyPassword=${DBPSSWD} -e MyDb=${DBNAME}
-DKRSRCS := --mount type=bind,src=${MNTSRCS},dst=/home/gppy/Sources,ro
-DKRDEST := --mount type=bind,src=${MNTPLAYS},dst=/home/gppy/Playlists
+# DKRSRCS := --mount type=bind,src=${MNTSRCS},dst=/home/gppy/Sources,ro
+# DKRDEST := --mount type=bind,src=${MNTPLAYS},dst=/home/gppy/Playlists
+DKRVOLCRT := --driver local --opt type=nfs --opt o=addr=192.168.0.73,rw --opt device=:/nfs/Public
+DKRVOLMNT := -v nas:/netmnt
+
+.PHONY: nfs
+nfs:
+		${DOCKR} volume rm nas
+		${DOCKR} volume create ${DKRVOLCRT} nas
 
 .PHONY: catalog
 catalog: installs/gppy_catalog
@@ -19,7 +26,7 @@ clean-catalog:
 
 .PHONY: exec-catalog
 exec-catalog:
-		${DOCKR} run ${DKRENVS} ${DKRSRCS} ${DKRDEST} ${TARGET}-${T1}
+		${DOCKR} run ${DKRENVS} ${DKRVOLMNT} ${TARGET}-${T1}
 
 .PHONY: playgen
 playgen: installs/gppy_playgen
@@ -31,19 +38,22 @@ clean-playgen:
 
 .PHONY: exec-playgen
 exec-playgen:
-		${DOCKR} run ${DKRENVS} ${DKRSRCS} ${DKRDEST} ${TARGET}-${T2}
+		${DOCKR} run ${DKRENVS} ${DKRVOLMNT} ${TARGET}-${T2}
 
 .PHONY: proto
 proto: installs/gppy_playgen
+		
 		DOCKER_BUILDKIT=1 ${DOCKR} build -t ${TARGET}-${T3} -f ${T3}.dockerfile .
 
 .PHONY: clean-proto
 clean-proto:
+		${DOCKR} volume rm nas
+		${DOCKR} volume create ${DKRVOL} nas
 		DOCKER_BUILDKIT=1 ${DOCKR} build --no-cache -t ${TARGET}-${T3} -f ${T3}.dockerfile .
 
 .PHONY: exec-proto
-exec-proto:
-		${DOCKR} run ${DKRENVS} ${TARGET}-${T3}
+exec-proto: proto
+		${DOCKR} run ${DKRVOLMNT} -it --rm ${TARGET}-${T3} /bin/ash
 
 .PHONY: clean
 clean: clean-proto clean-catalog clean-playgen

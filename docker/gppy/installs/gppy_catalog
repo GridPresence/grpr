@@ -8,12 +8,15 @@ from pathlib import Path
 from gpm.extract import Extractor
 from gpm.db import Database
 
+MUSIC = Path("/netmnt/Audio/Music")
+
 if __name__ == "__main__":
     print("-------- Entering gppy_catalog")
     db = Database(refresh=True)
-    sources = Path(os.getenv("FLACSRCS"))
+    # sources = Path(os.getenv("FLACSRCS"))
+    sources = MUSIC
     print(sources)
-    playlists = Path(os.getenv("PLAYLISTS"))
+    playlists = MUSIC
     print(playlists)
     diskard = Extractor(source=sources, target=db)
     print("--------  Exiting gppy_catalog")
