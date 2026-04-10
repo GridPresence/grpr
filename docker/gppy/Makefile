@@ -13,8 +13,12 @@ DKRVOLMNT := -v nas:/netmnt
 
 .PHONY: nfs
 nfs:
-		${DOCKR} volume rm nas
 		${DOCKR} volume create ${DKRVOLCRT} nas
+
+.PHONY: clean-nfs
+clean-nfs:
+		${DOCKR} volume rm nas
+
 
 .PHONY: catalog
 catalog: installs/gppy_catalog
@@ -25,7 +29,7 @@ clean-catalog:
 		DOCKER_BUILDKIT=1 ${DOCKR} build --no-cache -t ${TARGET}-${T1} -f ${T1}.dockerfile .
 
 .PHONY: exec-catalog
-exec-catalog:
+exec-catalog: nfs
 		${DOCKR} run ${DKRENVS} ${DKRVOLMNT} ${TARGET}-${T1}
 
 .PHONY: playgen
@@ -37,7 +41,7 @@ clean-playgen:
 		DOCKER_BUILDKIT=1 ${DOCKR} build --no-cache -t ${TARGET}-${T2} -f ${T2}.dockerfile .
 
 .PHONY: exec-playgen
-exec-playgen:
+exec-playgen: nfs
 		${DOCKR} run ${DKRENVS} ${DKRVOLMNT} ${TARGET}-${T2}
 
 .PHONY: proto
