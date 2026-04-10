@@ -43,7 +43,7 @@ clean-proto:
 
 .PHONY: exec-proto
 exec-proto:
-		${DOCKR} run ${DKRENVS} ${DKRSRCS} ${DKRDEST} ${TARGET}-${T3}
+		${DOCKR} run ${DKRENVS} ${TARGET}-${T3}
 
 .PHONY: clean
 clean: clean-proto clean-catalog clean-playgen
