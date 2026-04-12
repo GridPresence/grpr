@@ -25,12 +25,12 @@ RUN install /tmp/gpm/__init__.py /usr/local/bin/gpm/__init__.py
 RUN install /tmp/gpm/audio.py /usr/local/bin/gpm/audio.py
 RUN install /tmp/gpm/db.py /usr/local/bin/gpm/db.py
 RUN install /tmp/gpm/generate.py /usr/local/bin/gpm/generate.py
-RUN install /tmp/gpm/extract.py /usr/local/bin/gpm/extract.py
+RUN install /tmp/gpm/validate.py /usr/local/bin/gpm/validate.py
 
 RUN install /tmp/gppy_env.sh /usr/local/bin/gppy_env.sh
 
-RUN install /tmp/gppy_catalog /usr/local/bin/gppy_catalog
-RUN install /tmp/gppy_exec_catalog /usr/local/bin/gppy_exec_catalog
+RUN install /tmp/gppy_catalog /usr/local/bin/gppy_validate
+RUN install /tmp/gppy_exec_catalog /usr/local/bin/gppy_exec_validate
 
 
 # FROM base
@@ -48,4 +48,4 @@ ENV PLAYLISTS=/home/$SERVICE_NAME/Playlists
 RUN chown -R $SERVICE_NAME:$SERVICE_NAME /home/$SERVICE_NAME
 USER $SERVICE_NAME
 
-CMD ["ash", "/usr/local/bin/gppy_exec_catalog"]
+CMD ["ash", "/usr/local/bin/gppy_exec_validate"]

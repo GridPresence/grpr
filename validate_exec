@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+echo "---- Executing validate_exec"
+# pushd $HOME/Code/grpr
+git fetch
+git pull
+echo "validate_exec : "$(pwd)
+pushd docker/gppy
+make validate
+make exec-validate
+popd
+echo "---- Exiting validate_exec"
