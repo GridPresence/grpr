@@ -2,7 +2,7 @@ TARGET := gppy
 T1 := catalog
 T2 := playgen
 T3 := proto
-T$ := validate
+T4 := validate
 
 DOCKR ?= docker
 
