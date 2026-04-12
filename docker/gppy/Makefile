@@ -59,7 +59,7 @@ exec-proto: proto
 
 .PHONY: validate
 validate: installs/gppy_validate
-		DOCKER_BUILDKIT=1 ${DOCKR} build -t ${TARGET}-${T1} -f ${T4}.dockerfile .
+		DOCKER_BUILDKIT=1 ${DOCKR} build -t ${TARGET}-${T4} -f ${T4}.dockerfile .
 
 .PHONY: clean-validate
 clean-validate:
