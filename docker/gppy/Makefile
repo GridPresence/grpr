@@ -7,7 +7,7 @@ T4 := validate
 DOCKR ?= docker
 
 DKRENVS := -e MyServer=${DBSRVR} -e MyUser=${DBUSR} -e MyPassword=${DBPSSWD} -e MyDb=${DBNAME}
-# DKRSRCS := --mount type=bind,src=${MNTSRCS},dst=/home/gppy/Sources,ro
+DKRSRCS := --mount type=bind,src=${MNTSRCS},dst=/home/gppy/Sources,ro
 # DKRDEST := --mount type=bind,src=${MNTPLAYS},dst=/home/gppy/Playlists
 DKRVOLCRT := --driver local --opt type=nfs --opt o=addr=192.168.0.73,rw --opt device=:/nfs/Public
 DKRVOLMNT := -v nas:/netmnt
@@ -67,7 +67,7 @@ clean-validate:
 
 .PHONY: exec-validate
 exec-validate:
-		${DOCKR} run ${DKRENVS} ${DKRVOLMNT} ${TARGET}-${T4}
+		${DOCKR} run ${DKRENVS} ${DKRSRCS} ${TARGET}-${T4}
 
 .PHONY: clean
 clean: clean-proto clean-validate clean-catalog clean-playgen
