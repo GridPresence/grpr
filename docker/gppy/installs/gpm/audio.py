@@ -121,14 +121,14 @@ class FlacFile:
                 if "disctotal" not in self._mdata:
                     print("Missing disctotal field")
                     print(self._mdata)
-                if "discnum" not in self._mdata:
-                    print("Missing discnum field")
+                if "discnumber" not in self._mdata:
+                    print("Missing discnumber field")
                     print(self._mdata)
                 if "tracktotal" not in self._mdata:
                     print("Missing tracktotal field")
                     print(self._mdata)
-                if "tracknum" not in self._mdata:
-                    print("Missing tracknum field")
+                if "tracknumber" not in self._mdata:
+                    print("Missing tracknumber field")
                     print(self._mdata)
         except KeyError as e:
             print(self._mdata)
