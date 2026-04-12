@@ -66,7 +66,7 @@ clean-validate:
 		DOCKER_BUILDKIT=1 ${DOCKR} build --no-cache -t ${TARGET}-${T4} -f ${T4}.dockerfile .
 
 .PHONY: exec-validate
-exec-catalog:
+exec-validate:
 		${DOCKR} run ${DKRENVS} ${DKRVOLMNT} ${TARGET}-${T4}
 
 .PHONY: clean
