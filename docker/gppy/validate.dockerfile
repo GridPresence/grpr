@@ -29,8 +29,8 @@ RUN install /tmp/gpm/validate.py /usr/local/bin/gpm/validate.py
 
 RUN install /tmp/gppy_env.sh /usr/local/bin/gppy_env.sh
 
-RUN install /tmp/gppy_catalog /usr/local/bin/gppy_validate
-RUN install /tmp/gppy_exec_catalog /usr/local/bin/gppy_exec_validate
+RUN install /tmp/gppy_validate /usr/local/bin/gppy_validate
+RUN install /tmp/gppy_exec_validate /usr/local/bin/gppy_exec_validate
 
 
 # FROM base
