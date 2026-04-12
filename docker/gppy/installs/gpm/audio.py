@@ -109,27 +109,23 @@ class FlacFile:
                     temp = self._mdata["date"]
                     self._mdata["date"] = temp[:4]
             if self._val:
+                subj: str = (
+                    f"{self._mdata["artist"]} - {self._mdata["album"]} - {self._mdata["file"]}"
+                )
                 if "albumartist" not in self._mdata:
-                    print("Missing albumartist field")
-                    print(self._mdata)
+                    print(f"Missing albumartist field : {subj}")
                 if "genre" not in self._mdata:
-                    print("Missing genre field")
-                    print(self._mdata)
+                    print(f"Missing genre field : {subj}")
                 if "date" not in self._mdata:
-                    print("Missing date field")
-                    print(self._mdata)
+                    print(f"Missing date field : {subj}")
                 if "disctotal" not in self._mdata:
-                    print("Missing disctotal field")
-                    print(self._mdata)
+                    print(f"Missing disctotal field : {subj}")
                 if "discnumber" not in self._mdata:
-                    print("Missing discnumber field")
-                    print(self._mdata)
+                    print(f"Missing discnumber field : {subj}")
                 if "tracktotal" not in self._mdata:
-                    print("Missing tracktotal field")
-                    print(self._mdata)
+                    print(f"Missing tracktotal field : {subj}")
                 if "tracknumber" not in self._mdata:
-                    print("Missing tracknumber field")
-                    print(self._mdata)
+                    print(f"Missing tracknumber field : {subj}")
         except KeyError as e:
             print(self._mdata)
             print("Missing key: {e.args[0]}")
