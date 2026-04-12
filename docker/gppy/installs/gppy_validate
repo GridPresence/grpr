@@ -12,7 +12,7 @@ MUSIC = Path("/Volumes/BLU5TB/FLAC/Music")
 
 if __name__ == "__main__":
     print("-------- Entering gppy_validate")
-    sources = MUSIC
+    sources = Path(os.getenv("FLACSRCS"))
     print(sources)
     diskard = Validator(source=sources)
     print("--------  Exiting gppy_validate")
