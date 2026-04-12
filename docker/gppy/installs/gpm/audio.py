@@ -79,8 +79,9 @@ class LibFile:
 class FlacFile:
     """Wrapper class"""
 
-    def __init__(self, sbj: LibFile):
+    def __init__(self, sbj: LibFile, validate: bool = False):
         self._sbj: LibFile = sbj
+        self._val = validate
         self._mdata: Dict[str, Any] = {}
         try:
             self._mdata["path"] = str(self._sbj.path)
@@ -107,7 +108,28 @@ class FlacFile:
                 if len(self._mdata["date"]) > 4:
                     temp = self._mdata["date"]
                     self._mdata["date"] = temp[:4]
-            # print(self._mdata)
+            if self._val:
+                if "albumartist" not in self._mdata:
+                    print("Missing albumartist field")
+                    print(self._mdata)
+                if "genre" not in self._mdata:
+                    print("Missing genre field")
+                    print(self._mdata)
+                if "date" not in self._mdata:
+                    print("Missing date field")
+                    print(self._mdata)
+                if "disctotal" not in self._mdata:
+                    print("Missing disctotal field")
+                    print(self._mdata)
+                if "discnum" not in self._mdata:
+                    print("Missing discnum field")
+                    print(self._mdata)
+                if "tracktotal" not in self._mdata:
+                    print("Missing tracktotal field")
+                    print(self._mdata)
+                if "tracknum" not in self._mdata:
+                    print("Missing tracknum field")
+                    print(self._mdata)
         except KeyError as e:
             print(self._mdata)
             print("Missing key: {e.args[0]}")

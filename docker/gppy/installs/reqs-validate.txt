@@ -1,0 +1,9 @@
+pip
+python-dateutil
+types-python-dateutil
+packaging
+truststore 
+sqlalchemy
+mysql-connector-python
+mutagen
+

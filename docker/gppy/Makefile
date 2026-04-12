@@ -2,6 +2,7 @@ TARGET := gppy
 T1 := catalog
 T2 := playgen
 T3 := proto
+T$ := validate
 
 DOCKR ?= docker
 
@@ -56,8 +57,20 @@ clean-proto:
 exec-proto: proto
 		${DOCKR} run ${DKRVOLMNT} -it --rm ${TARGET}-${T3} /bin/ash
 
+.PHONY: validate
+validate: installs/gppy_validate
+		DOCKER_BUILDKIT=1 ${DOCKR} build -t ${TARGET}-${T1} -f ${T4}.dockerfile .
+
+.PHONY: clean-validate
+clean-validate:
+		DOCKER_BUILDKIT=1 ${DOCKR} build --no-cache -t ${TARGET}-${T4} -f ${T4}.dockerfile .
+
+.PHONY: exec-validate
+exec-catalog:
+		${DOCKR} run ${DKRENVS} ${DKRVOLMNT} ${TARGET}-${T4}
+
 .PHONY: clean
-clean: clean-proto clean-catalog clean-playgen
+clean: clean-proto clean-validate clean-catalog clean-playgen
 
 .PHONY: all
 all: catalog playgen

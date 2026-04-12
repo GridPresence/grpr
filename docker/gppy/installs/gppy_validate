@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+
+import os
+import json
+import time
+from pathlib import Path
+
+from gpm.validate import Validator
+
+# MUSIC = Path("/netmnt/Audio/Music")
+MUSIC = Path("/Volumes/BLU5TB/FLAC/Music")
+
+if __name__ == "__main__":
+    print("-------- Entering gppy_validate")
+    sources = MUSIC
+    print(sources)
+    diskard = Validator(source=sources)
+    print("--------  Exiting gppy_validate")
