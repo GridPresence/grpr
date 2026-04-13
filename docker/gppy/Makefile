@@ -4,6 +4,8 @@ T2 := playgen
 T3 := proto
 T4 := validate
 
+DOCKER := docker
+
 DKRENVS := -e MyServer=${DBSRVR} -e MyUser=${DBUSR} -e MyPassword=${DBPSSWD} -e MyDb=${DBNAME}
 DKRSRCS := --mount type=bind,src=${MNTSRCS},dst=/home/gppy/Sources,ro
 # DKRDEST := --mount type=bind,src=${MNTPLAYS},dst=/home/gppy/Playlists
