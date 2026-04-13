@@ -49,5 +49,5 @@ class Generator:
             subpath: Path = Path(tpath.parts[1], tpath.parts[2])
             m3ustr = f"#EXTINF:{value[2]},{artist} - {value[1]}"
             self._trax.append(m3ustr)
-            self._trax.append(subpath)
+            self._trax.append(str(subpath))
         
