@@ -22,7 +22,8 @@ class Generator:
             self._artists.append(value[0])
         print(self._artists)
 
-    def _get_artists_albums(self):
-        for value in self._session.query(Track.artist, Track.album).distinct():
-            self._albums.append(value)
+    def _get_artist_albums(self, artist: str):
+        for value in self._session.query(Track.album).distinct().where(Track.artist==artist):
+            self._albums.append(value[0])
+        print(f"----- {artist}")
         print(self._albums)
