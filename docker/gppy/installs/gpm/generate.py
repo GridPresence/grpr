@@ -32,11 +32,11 @@ class Generator:
         print(f"* {artist}")
         if len(albums) > 2:
             self._trax = []
-            fpath: Path = self._target.joinpath(artist,f"{artist}.m3u")
             print(str(fpath), flush=True)
             for item in albums:
                 # print(f"\t {item}")
                 self._get_trax(artist, item)
+            fpath: Path = self._target.joinpath(self._fpart,f"{artist}.m3u")
             with open(fpath,"w",encoding="utf8") as fyle:
                 for nitem in self._trax:
                     fyle.write(nitem)
@@ -47,6 +47,7 @@ class Generator:
         for value in self._session.query(Track.file, Track.title, Track.length, Track.path).where(Track.artist==artist, Track.album==album).order_by(Track.file):
             tpath: Path = Path(value[3])
             subpath: Path = Path(tpath.parts[1], tpath.parts[2])
+            self._fpart: Path = Path(tpath[0])
             m3ustr = f"#EXTINF:{value[2]},{artist} - {value[1]}"
             self._trax.append(m3ustr)
             self._trax.append(str(subpath))
