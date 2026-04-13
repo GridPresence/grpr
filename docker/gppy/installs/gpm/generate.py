@@ -27,5 +27,6 @@ class Generator:
         self._albums = []
         for value in self._session.query(Track.album).distinct().where(Track.artist==artist):
             self._albums.append(value[0])
-        print(f"----- {artist}")
-        print(self._albums)
+        print(f"* {artist}")
+        for item in self._albums:
+            print(f"\t\t {item}")
