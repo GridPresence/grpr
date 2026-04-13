@@ -26,7 +26,7 @@ class Generator:
 
     def _get_artist_albums(self, artist: str):
         self._albums = []
-        for value in self._session.query(Track.album).distinct().where(Track.artist==artist).orderby(Track.date):
+        for value in self._session.query(Track.album).distinct().where(Track.artist==artist).order_by(Track.date):
             self._albums.append(value[0])
         print(f"* {artist}")
         for item in self._albums:
