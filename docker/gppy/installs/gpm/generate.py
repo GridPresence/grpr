@@ -30,7 +30,7 @@ class Generator:
             self._albums.append(value[0])
         print(f"* {artist}")
         for item in self._albums:
-            print(f"\t {item}")
+            # print(f"\t {item}")
             self._get_trax(artist, item)
     
     def _get_trax(self, artist: str, album: str):
@@ -38,6 +38,8 @@ class Generator:
         for value in self._session.query(Track.file, Track.title, Track.length, Track.path).where(Track.artist==artist, Track.album==album).order_by(Track.file):
             tpath: Path = Path(value[3])
             subpath: Path = Path(tpath.parts[1], tpath.parts[2])
+            m3ustr = f"#EXTINF: {value[2]},{artist} - {value[1]}"
+            self._trax.append(m3ustr)
             self._trax.append(subpath)
         for nitem in self._trax:
-            print(f"\t\t {nitem}")
+            print(f"\t{nitem}")
