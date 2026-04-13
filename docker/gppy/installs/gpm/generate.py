@@ -35,7 +35,7 @@ class Generator:
     
     def _get_trax(self, artist: str, album: str):
         self._trax = []
-        for value in self._session.query(Track.file, Track.length, Track.path).where(Track.artist==artist, Track.album==album).order_by(Track.file):
-            self._trax.append(value[0])
+        for value in self._session.query(Track.file, Track.title, Track.length, Track.path).where(Track.artist==artist, Track.album==album).order_by(Track.file):
+            self._trax.append(value[3])
         for nitem in self._trax:
             print(f"\t\t {nitem}")
