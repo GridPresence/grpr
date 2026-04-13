@@ -8,12 +8,12 @@ from pathlib import Path
 from gpm.generate import Generator
 from gpm.db import Database
 
+MUSIC = Path("/netmnt/Audio/Music")
+
 if __name__ == "__main__":
     print("-------- Entering gppy_playgen")
     db = Database()
-    sources = Path(os.getenv("FLACSRCS"))
-    print(sources)
-    playlists = Path(os.getenv("PLAYLISTS"))
+    playlists = MUSIC
     print(playlists)
     diskard = Generator(target=playlists, source=db)
     print("--------  Exiting gppy_playgen")
