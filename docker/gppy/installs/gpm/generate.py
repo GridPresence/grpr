@@ -28,7 +28,7 @@ class Generator:
     def _get_artist_albums(self, artist: str):
         albums = []
         for value in self._session.query(Track.album, Track.date).distinct().where(Track.artist==artist).order_by(Track.date):
-            self._albums.append(value[0])
+            albums.append(value[0])
         print(f"* {artist}")
         if len(albums) > 2:
             self._trax = []
