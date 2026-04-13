@@ -33,6 +33,7 @@ class Generator:
         if len(albums) > 2:
             self._trax = []
             fpath: Path = self._target.joinpath(artist,f"{artist}.m3u")
+            print(str(fpath), flush=True))
             for item in albums:
                 # print(f"\t {item}")
                 self._get_trax(artist, item)
