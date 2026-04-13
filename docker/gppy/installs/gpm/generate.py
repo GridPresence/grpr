@@ -1,5 +1,5 @@
 import json
-from typing import Dict, Any
+from typing import List
 from pathlib import Path
 
 from .db import Database, Track
@@ -20,7 +20,7 @@ class Generator:
         for value in self._session.query(Track.artist).distinct():
             self._artists.append(value[0])
         self._artists.sort()
-        print(self._artists)
+        # print(self._artists)
         for art in self._artists:
             self._get_artist_albums(art)
 
@@ -30,4 +30,12 @@ class Generator:
             self._albums.append(value[0])
         print(f"* {artist}")
         for item in self._albums:
-            print(f"\t\t {item}")
+            print(f"\t {item}")
+            self._get_trax(artist, item)
+    
+    def _get_trax(self, artist: str, album: str):
+        self._trax = []
+        for value in self._session.query(Track.file, Track.length, Track.path).where(Track.artist==artist, Track.album==album).order_by(Track.file):
+            self._trax.append(value[0])
+        for nitem in self._trax:
+            print(f"\t\t {nitem}")
