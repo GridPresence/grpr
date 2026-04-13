@@ -47,7 +47,7 @@ class Generator:
         for value in self._session.query(Track.file, Track.title, Track.length, Track.path).where(Track.artist==artist, Track.album==album).order_by(Track.file):
             tpath: Path = Path(value[3])
             subpath: Path = Path(tpath.parts[1], tpath.parts[2])
-            self._fpart: Path = Path(tpath[0])
+            self._fpart: Path = Path(tpath.parts[0])
             m3ustr = f"#EXTINF:{value[2]},{artist} - {value[1]}"
             self._trax.append(m3ustr)
             self._trax.append(str(subpath))
