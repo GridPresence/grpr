@@ -40,7 +40,7 @@ class Generator:
             with open(fpath,"w",encoding="utf8") as fyle:
                 for nitem in self._trax:
                     fyle.write(nitem)
-                    fyle.write("\n|")
+                    fyle.write("\n")
             fyle.close()
     
     def _get_trax(self, artist: str, album: str):
