@@ -32,11 +32,11 @@ class Generator:
         print(f"* {artist}")
         if len(albums) > 2:
             self._trax = []
-            print(str(fpath), flush=True)
             for item in albums:
                 # print(f"\t {item}")
                 self._get_trax(artist, item)
             fpath: Path = self._target.joinpath(self._fpart,f"{artist}.m3u")
+            print(str(fpath), flush=True)
             with open(fpath,"w",encoding="utf8") as fyle:
                 for nitem in self._trax:
                     fyle.write(nitem)
