@@ -24,6 +24,7 @@ class Generator:
             self._get_artist_albums(art)
 
     def _get_artist_albums(self, artist: str):
+        self._albums = []
         for value in self._session.query(Track.album).distinct().where(Track.artist==artist):
             self._albums.append(value[0])
         print(f"----- {artist}")
