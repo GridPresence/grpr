@@ -49,19 +49,21 @@ class Generator:
             fpath: Path = self._target.joinpath(self._fpart, f"{artist} (All).m3u")
             hipath: Path = self._target.joinpath(self._fpart, f"{artist} (Std).m3u")
             stdpath: Path = self._target.joinpath(self._fpart, f"{artist} (Hires).m3u")
-            print(str(fpath), flush=True)
+            print(f"\t{str(fpath)}", flush=True)
             with open(fpath, "w", encoding="utf8") as fyle:
                 for nitem in self._trax:
                     fyle.write(nitem)
                     fyle.write("\n")
             fyle.close()
             if len(self._stdtrax) > 0:
+                print(f"\t{str(stdpath)}", flush=True)
                 with open(stdpath, "w", encoding="utf8") as fylestd:
                     for nitem in self._stdtrax:
                         fylestd.write(nitem)
                         fylestd.write("\n")
                     fylestd.close()
             if len(self._hitrax) > 0:
+                print(f"\t{str(hipath)}", flush=True)
                 with open(hipath, "w", encoding="utf8") as fylehi:
                     for nitem in self._hitrax:
                         fylehi.write(nitem)
