@@ -47,8 +47,8 @@ class Generator:
                 # print(f"\t {item}")
                 self._get_trax(artist, item)
             fpath: Path = self._target.joinpath(self._fpart, f"{artist} (All).m3u")
-            hipath: Path = self._target.joinpath(self._fpart, f"{artist} (Std).m3u")
-            stdpath: Path = self._target.joinpath(self._fpart, f"{artist} (Hires).m3u")
+            hipath: Path = self._target.joinpath(self._fpart, f"{artist} (Hires).m3u")
+            stdpath: Path = self._target.joinpath(self._fpart, f"{artist} (Std).m3u")
             print(f"\t{str(fpath)}", flush=True)
             with open(fpath, "w", encoding="utf8") as fyle:
                 for nitem in self._trax:
