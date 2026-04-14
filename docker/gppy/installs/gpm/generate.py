@@ -17,6 +17,7 @@ class Generator:
         self._trax: List[str] = []
         self._hitrax: List[str] = []
         self._stdtrax: List[str] = []
+        self._fpart: Path = Path("/")
 
         self._get_artists()
 
@@ -81,7 +82,7 @@ class Generator:
             m3ustr = f"#EXTINF:{value[2]},{artist} - {value[1]}"
             self._trax.append(m3ustr)
             self._trax.append(str(subpath))
-            if value[4] == "1":
+            if value[4] == 1:
                 self._hitrax.append(m3ustr)
                 self._hitrax.append(str(subpath))
             else:
