@@ -14,6 +14,9 @@ class Generator:
         self._source: Database = source
         self._session = self._source.session
         self._target: Path = target
+        self._trax: List[str] = []
+        self._hitrax: List[str] = []
+        self._stdtrax: List[str] = []
 
         self._get_artists()
 
@@ -27,28 +30,60 @@ class Generator:
 
     def _get_artist_albums(self, artist: str):
         albums = []
-        for value in self._session.query(Track.album, Track.date).distinct().where(Track.artist==artist).order_by(Track.date):
+        for value in (
+            self._session.query(Track.album, Track.date)
+            .distinct()
+            .where(Track.artist == artist)
+            .order_by(Track.date)
+        ):
             albums.append(value[0])
         print(f"* {artist}")
-        if len(albums) > 2:
+        if len(albums) > 1:
             self._trax = []
+            self._hitrax = []
+            self._stdtrax = []
             for item in albums:
                 # print(f"\t {item}")
                 self._get_trax(artist, item)
-            fpath: Path = self._target.joinpath(self._fpart,f"{artist}.m3u")
+            fpath: Path = self._target.joinpath(self._fpart, f"{artist} (All).m3u")
+            hipath: Path = self._target.joinpath(self._fpart, f"{artist} (Std).m3u")
+            stdpath: Path = self._target.joinpath(self._fpart, f"{artist} (Hires).m3u")
             print(str(fpath), flush=True)
-            with open(fpath,"w",encoding="utf8") as fyle:
+            with open(fpath, "w", encoding="utf8") as fyle:
                 for nitem in self._trax:
                     fyle.write(nitem)
                     fyle.write("\n")
             fyle.close()
-    
+            if len(self._stdtrax) > 0:
+                with open(stdpath, "w", encoding="utf8") as fylestd:
+                    for nitem in self._stdtrax:
+                        fylestd.write(nitem)
+                        fylestd.write("\n")
+                    fylestd.close()
+            if len(self._hitrax) > 0:
+                with open(hipath, "w", encoding="utf8") as fylehi:
+                    for nitem in self._hitrax:
+                        fylehi.write(nitem)
+                        fylehi.write("\n")
+                    fylehi.close()
+
     def _get_trax(self, artist: str, album: str):
-        for value in self._session.query(Track.file, Track.title, Track.length, Track.path).where(Track.artist==artist, Track.album==album).order_by(Track.file):
+        for value in (
+            self._session.query(
+                Track.file, Track.title, Track.length, Track.path, Track.hires
+            )
+            .where(Track.artist == artist, Track.album == album)
+            .order_by(Track.file)
+        ):
             tpath: Path = Path(value[3])
             subpath: Path = Path(tpath.parts[1], tpath.parts[2])
             self._fpart: Path = Path(tpath.parts[0])
             m3ustr = f"#EXTINF:{value[2]},{artist} - {value[1]}"
             self._trax.append(m3ustr)
             self._trax.append(str(subpath))
-        
+            if value[4] == "1":
+                self._hitrax.append(m3ustr)
+                self._hitrax.append(str(subpath))
+            else:
+                self._stdtrax.append(m3ustr)
+                self._stdtrax.append(str(subpath))
