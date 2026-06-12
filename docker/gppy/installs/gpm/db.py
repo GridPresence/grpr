@@ -17,13 +17,14 @@ class Base(DeclarativeBase):
 
 class Database:
     def __init__(self, refresh: bool = False):
-        self._url = URL.create(
-            "mysql+mysqlconnector",
-            username=os.getenv("MyUser"),
-            password=os.getenv("MyPassword"),
-            host=os.getenv("MyServer"),
-            database=os.getenv("MyDb"),
-        )
+        # self._url = URL.create(
+        #     "mysql+mysqlconnector",
+        #     username=os.getenv("MyUser"),
+        #     password=os.getenv("MyPassword"),
+        #     host=os.getenv("MyServer"),
+        #     database=os.getenv("MyDb"),
+        # )
+        self._url = f"sqlite+pysqlite:////tmp/{os.getenv("MyDb")}"
         # self._engine = create_engine(
         #     self._url, echo=True, insertmanyvalues_page_size=100
         # )
